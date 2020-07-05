@@ -69,7 +69,7 @@ ALTER TABLE Office ADD FOREIGN KEY (org_id) REFERENCES Organization(id);
 CREATE INDEX IX_User_office_id ON User (office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
-CREATE INDEX IX_User_user_doc_id ON User (user_doc_id);
+CREATE UNIQUE INDEX UX_User_user_doc_id ON User (user_doc_id);
 ALTER TABLE User ADD FOREIGN KEY (user_docs_id) REFERENCES User_Doc(id);
 
 CREATE INDEX IX_User_citizenship_id ON User (citizenship_id);
