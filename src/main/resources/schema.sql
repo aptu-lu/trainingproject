@@ -41,16 +41,15 @@ CREATE TABLE IF NOT EXISTS User_Doc (
     id         INTEGER NOT NULL     COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
     docs_id    INTEGER NOT NULL     COMMENT 'Уникальный идентификатор справочника документов',
-    doc_date   TIMESTAMP NOT NULL   COMMENT 'Дата'
+    doc_date   DATE NOT NULL        COMMENT 'Дата'
     doc_number VARCHAR(50) NOT NULL COMMENT 'Номер'
-
 );
 COMMENT ON TABLE User_Doc IS 'Документ пользователя';
 
 CREATE TABLE IF NOT EXISTS Docs (
     id         INTEGER NOT NULL     COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
-    doc_code   INTEGER NOT NULL     COMMENT 'Код',
+    doc_code   VARCHAR(50) NOT NULL COMMENT 'Код',
     doc_name   VARCHAR(50) NOT NULL COMMENT 'Название документа'
 );
 COMMENT ON TABLE Docs IS 'Справочник документов';
@@ -58,7 +57,7 @@ COMMENT ON TABLE Docs IS 'Справочник документов';
 CREATE TABLE IF NOT EXISTS Countries (
     id         INTEGER NOT NULL     COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
-    code       INTEGER NOT NULL     COMMENT 'Код',
+    code       VARCHAR(50) NOT NULL COMMENT 'Код',
     name       VARCHAR(50) NOT NULL COMMENT 'Название страны'
 );
 COMMENT ON TABLE Countries IS 'Справочник стран';

@@ -16,9 +16,9 @@ INSERT INTO User (office_id, first_name, middle_name, position, user_docs_id, ci
 
 INSERT INTO User (office_id, first_name, last_name, middle_name, position, phone, citizenship_id, is_identified) VALUES (3, 'Анастасия', 'Харитонова', 'Олеговна', 'менеджер', '85984574637', 2, false);
 
-INSERT INTO User_Doc (docs_id, doc_date, doc_number) VALUES (7, '04-06-2000', '49385859384');
+INSERT INTO User_Doc (docs_id, doc_date, doc_number) VALUES (7, '2000-05-04', '49385859384');
 
-INSERT INTO User_Doc (docs_id, doc_date, doc_number) VALUES (4, '15-07-2011', '98580048659');
+INSERT INTO User_Doc (docs_id, doc_date, doc_number) VALUES (4, '2011-12-07', '98580048659');
 
 INSERT INTO Docs (doc_code, doc_name) VALUES (03, 'Свидетельство о рождении');
 
