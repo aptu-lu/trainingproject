@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS User (
     middle_name       VARCHAR(50)          COMMENT 'Отчество'
     position          VARCHAR(50) NOT NULL COMMENT 'Позиция'
     phone             VARCHAR(50)          COMMENT 'Номер телефона'
-    user_docs_id      INTEGER              COMMENT 'Уникальный идентификатор документа пользователя'
+    user_doc_id       INTEGER              COMMENT 'Уникальный идентификатор документа пользователя'
     citizenship_id    INTEGER              COMMENT 'Уникальный идентификатор гражданства'
     is_identified     BOOLEAN              COMMENT 'Идентифицированный ли'
 );
@@ -40,7 +40,7 @@ COMMENT ON TABLE User IS 'Пользователь';
 CREATE TABLE IF NOT EXISTS User_Doc (
     id         INTEGER NOT NULL     COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
-    docs_id    INTEGER NOT NULL     COMMENT 'Уникальный идентификатор справочника документов',
+    doc_id     INTEGER NOT NULL     COMMENT 'Уникальный идентификатор справочника документов',
     doc_date   DATE NOT NULL        COMMENT 'Дата'
     doc_number VARCHAR(50) NOT NULL COMMENT 'Номер'
 );
@@ -49,8 +49,8 @@ COMMENT ON TABLE User_Doc IS 'Документ пользователя';
 CREATE TABLE IF NOT EXISTS Docs (
     id         INTEGER NOT NULL     COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
-    doc_code   VARCHAR(50) NOT NULL COMMENT 'Код',
-    doc_name   VARCHAR(50) NOT NULL COMMENT 'Название документа'
+    code       VARCHAR(50) NOT NULL COMMENT 'Код',
+    name       VARCHAR(50) NOT NULL COMMENT 'Название документа'
 );
 COMMENT ON TABLE Docs IS 'Справочник документов';
 
@@ -68,14 +68,14 @@ ALTER TABLE Office ADD FOREIGN KEY (org_id) REFERENCES Organization(id);
 CREATE INDEX IX_User_office_id ON User (office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
-CREATE UNIQUE INDEX UX_User_user_doc_id ON User (user_doc_id);
-ALTER TABLE User ADD FOREIGN KEY (user_docs_id) REFERENCES User_Doc(id);
+CREATE INDEX IX_User_user_doc_id ON User (user_doc_id);
+ALTER TABLE User ADD FOREIGN KEY (user_doc_id) REFERENCES User_Doc(id);
 
 CREATE INDEX IX_User_citizenship_id ON User (citizenship_id);
 ALTER TABLE User ADD FOREIGN KEY (citizenship_id) REFERENCES Countries(id);
 
-CREATE INDEX IX_User_Doc_docs_id ON User_Doc (docs_id);
-ALTER TABLE User_Doc ADD FOREIGN KEY (docs_id) REFERENCES Docs(id);
+CREATE INDEX IX_User_Doc_doc_id ON User_Doc (doc_id);
+ALTER TABLE User_Doc ADD FOREIGN KEY (doc_id) REFERENCES Docs(id);
 
 CREATE INDEX IX_Organization_name ON Organization (name);
 CREATE INDEX IX_Organization_inn ON Organization (inn);
@@ -90,6 +90,6 @@ CREATE INDEX IX_User_last_name ON User (last_name);
 CREATE INDEX IX_User_middle_name ON User (middle_name);
 CREATE INDEX IX_User_position ON User (position);
 
-CREATE INDEX IX_Docs_doc_code ON Docs (doc_code);
+CREATE INDEX IX_Docs_code ON Docs (code);
 
 CREATE INDEX IX_Countries_code ON Countries (code);
