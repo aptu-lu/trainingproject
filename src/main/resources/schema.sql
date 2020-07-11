@@ -76,3 +76,20 @@ ALTER TABLE User ADD FOREIGN KEY (citizenship_id) REFERENCES Countries(id);
 
 CREATE INDEX IX_User_Doc_docs_id ON User_Doc (docs_id);
 ALTER TABLE User_Doc ADD FOREIGN KEY (docs_id) REFERENCES Docs(id);
+
+CREATE INDEX IX_Organization_name ON Organization (name);
+CREATE INDEX IX_Organization_inn ON Organization (inn);
+CREATE INDEX IX_Organization_isActive ON Organization (isActive);
+
+CREATE INDEX IX_Office_name ON Office (name);
+CREATE INDEX IX_Office_phone ON Office (phone);
+CREATE INDEX IX_Office_isActive ON Office (isActive);
+
+CREATE INDEX IX_User_first_name ON User (first_name);
+CREATE INDEX IX_User_last_name ON User (last_name);
+CREATE INDEX IX_User_middle_name ON User (middle_name);
+CREATE INDEX IX_User_position ON User (position);
+
+CREATE INDEX IX_Docs_doc_code ON Docs (doc_code);
+
+CREATE INDEX IX_Countries_code ON Countries (code);
