@@ -14,6 +14,10 @@ public class User {
     @Version
     private int version;
 
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "office_id")
+    private Office officeId;
+
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
@@ -36,9 +40,9 @@ public class User {
     @JoinColumn(name = "user_doc_id")
     private UserDoc userDoc;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "citizenship_id")
-    private int citizenshipId;
+    private Countries citizenshipId;
 
     public int getId() {
         return id;
@@ -104,11 +108,19 @@ public class User {
         this.userDoc = userDoc;
     }
 
-    public int getCitizenshipId() {
+    public Countries getCitizenshipId() {
         return citizenshipId;
     }
 
-    public void setCitizenshipId(int citizenshipId) {
+    public void setCitizenshipId(Countries citizenshipId) {
         this.citizenshipId = citizenshipId;
+    }
+
+    public Office getOfficeId() {
+        return officeId;
+    }
+
+    public void setOfficeId(Office officeId) {
+        this.officeId = officeId;
     }
 }
