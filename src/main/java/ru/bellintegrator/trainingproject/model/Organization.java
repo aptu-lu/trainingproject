@@ -1,7 +1,12 @@
 package ru.bellintegrator.trainingproject.model;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Organization")
@@ -38,10 +43,6 @@ public class Organization {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
