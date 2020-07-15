@@ -11,10 +11,6 @@ public class OfficeView {
     @Digits(integer = 10, fraction = 0)
     private int id;
 
-    @NotNull(groups = MarkerValidate.Save.class)
-    @Digits(integer = 10, fraction = 0)
-    private int orgId;
-
     @NotNull(groups = MarkerValidate.Update.class)
     @Size(min = 2, max = 50)
     private String name;
@@ -34,14 +30,6 @@ public class OfficeView {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(int orgId) {
-        this.orgId = orgId;
     }
 
     public String getName() {

@@ -1,6 +1,10 @@
 package ru.bellintegrator.trainingproject.view;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class UserView {
@@ -8,10 +12,6 @@ public class UserView {
     @NotNull(groups = {MarkerValidate.Get.class,MarkerValidate.Update.class})
     @Digits(integer = 10, fraction = 0)
     private int id;
-
-    @NotNull(groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
-    @Digits(integer = 10, fraction = 0)
-    private int officeId;
 
     @NotNull(groups = {MarkerValidate.Update.class,MarkerValidate.Save.class})
     @Size(min = 2, max = 50)
@@ -56,14 +56,6 @@ public class UserView {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getOfficeId() {
-        return officeId;
-    }
-
-    public void setOfficeId(int officeId) {
-        this.officeId = officeId;
     }
 
     public String getFirstName() {
