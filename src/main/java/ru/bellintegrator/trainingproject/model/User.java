@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "User")
@@ -46,10 +45,6 @@ public class User {
 
     @Column(name = "is_identified")
     private boolean isIdentified;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_doc_id")
-    private UserDoc userDoc;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "citizenship_id")
@@ -105,14 +100,6 @@ public class User {
 
     public void setIdentified(boolean identified) {
         isIdentified = identified;
-    }
-
-    public UserDoc getUserDoc() {
-        return userDoc;
-    }
-
-    public void setUserDoc(UserDoc userDoc) {
-        this.userDoc = userDoc;
     }
 
     public Countries getCitizenshipId() {
