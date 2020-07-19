@@ -8,11 +8,11 @@ INSERT INTO Office (org_id, name, address, phone, is_active) VALUES (1, 'Зве�
 
 INSERT INTO Office (org_id, name, address) VALUES (2, 'Компас', 'ул. Пушкина 19');
 
-INSERT INTO User (office_id, first_name, last_name, middle_name, position, phone, user_docs_id, citizenship_id, is_identified) VALUES (1, 'Илья', 'Климов', 'Андреевич', 'слесарь', '84394959340', 1, 7, true);
+INSERT INTO User (office_id, first_name, last_name, middle_name, position, phone, citizenship_id, is_identified) VALUES (1, 'Илья', 'Климов', 'Андреевич', 'слесарь', '84394959340', 7, true);
 
 INSERT INTO User (office_id, first_name, last_name, middle_name, position, phone) VALUES (2, 'Андрей', 'Капустин', 'Олегович', 'механик', '83842095858',);
 
-INSERT INTO User (office_id, first_name, middle_name, position, user_docs_id, citizenship_id, is_identified) VALUES (2, 'Владимир', 'Владимирович', 'строитель', 2, 4, true);
+INSERT INTO User (office_id, first_name, middle_name, position, citizenship_id, is_identified) VALUES (2, 'Владимир', 'Владимирович', 'строитель', 4, true);
 
 INSERT INTO User (office_id, first_name, last_name, middle_name, position, phone, citizenship_id, is_identified) VALUES (3, 'Анастасия', 'Харитонова', 'Олеговна', 'менеджер', '85984574637', 2, false);
 

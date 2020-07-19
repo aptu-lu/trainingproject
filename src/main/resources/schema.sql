@@ -75,11 +75,11 @@ ALTER TABLE User_Doc ADD FOREIGN KEY (doc_id) REFERENCES Docs(id);
 
 CREATE INDEX IX_Organization_name ON Organization (name);
 CREATE INDEX IX_Organization_inn ON Organization (inn);
-CREATE INDEX IX_Organization_isActive ON Organization (isActive);
+CREATE INDEX IX_Organization_is_active ON Organization (is_active);
 
 CREATE INDEX IX_Office_name ON Office (name);
 CREATE INDEX IX_Office_phone ON Office (phone);
-CREATE INDEX IX_Office_isActive ON Office (isActive);
+CREATE INDEX IX_Office_is_active ON Office (is_active);
 
 CREATE INDEX IX_User_first_name ON User (first_name);
 CREATE INDEX IX_User_last_name ON User (last_name);
