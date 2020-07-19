@@ -69,10 +69,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         if (organizationFilter.getActive() != null) {
             builderCriteriaUpdate.set(organizationRoot.get(Organization_.isActive), organizationFilter.getActive());
         }
-        int rowsUpdated = entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
-        if (rowsUpdated != 1) {
-            //todo
-        }
+        entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
     }
 
     @Override

@@ -124,10 +124,7 @@ public class UserDaoImpl implements UserDao {
         if (userFilter.getIdentified() != null) {
             builderCriteriaUpdate.set(userRoot.get(User_.isIdentified), userFilter.getIdentified());
         }
-        int rowsUpdated = entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
-        if (rowsUpdated != 1) {
-            //todo
-        }
+        entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
     }
 
     @Override

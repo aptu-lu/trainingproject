@@ -74,10 +74,7 @@ public class OfficeDaoImpl implements OfficeDao {
         if (officeFilter.getActive() != null) {
             builderCriteriaUpdate.set(officeRoot.get(Office_.isActive), officeFilter.getActive());
         }
-        int rowsUpdated = entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
-        if (rowsUpdated != 1) {
-            //todo
-        }
+        entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
     }
 
     @Override
