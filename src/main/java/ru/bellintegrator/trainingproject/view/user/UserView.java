@@ -1,4 +1,4 @@
-package ru.bellintegrator.trainingproject.view;
+package ru.bellintegrator.trainingproject.view.user;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -30,25 +30,22 @@ public class UserView {
     @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")
     private String phone;
 
-    private boolean isIdentified;
-
-    @Digits(integer = 10, fraction = 0)
-    private String docCode;
-
     @Size(min = 2, max = 50)
     private String docName;
-
-    @Past
-    private LocalDate docDate;
 
     @Digits(integer = 10, fraction = 0)
     private String docNumber;
 
-    @Digits(integer = 10, fraction = 0)
-    private String citizenshipCode;
+    @Past
+    private LocalDate docDate;
 
     @Size(min = 2, max = 50)
     private String citizenshipName;
+
+    @Digits(integer = 10, fraction = 0)
+    private String citizenshipCode;
+
+    private Boolean isIdentified;
 
     public int getId() {
         return id;
@@ -98,20 +95,12 @@ public class UserView {
         this.phone = phone;
     }
 
-    public boolean isIdentified() {
+    public Boolean getIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
-    }
-
-    public String getDocCode() {
-        return docCode;
-    }
-
-    public void setDocCode(String docCode) {
-        this.docCode = docCode;
     }
 
     public String getDocName() {

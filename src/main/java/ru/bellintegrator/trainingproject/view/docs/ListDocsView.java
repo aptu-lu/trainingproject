@@ -1,26 +1,18 @@
-package ru.bellintegrator.trainingproject.view;
+package ru.bellintegrator.trainingproject.view.docs;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class DocsView {
+public class ListDocsView {
 
-    @Digits(integer = 10, fraction = 0)
-    private int id;
-
+    @NotNull
     @Digits(integer = 10, fraction = 0)
     private String code;
 
+    @NotNull
     @Size(min = 2, max = 50)
     private String name;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getCode() {
         return code;

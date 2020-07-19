@@ -1,18 +1,20 @@
-package ru.bellintegrator.trainingproject.view;
+package ru.bellintegrator.trainingproject.view.organization;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class CountriesView {
+public class ListOrganizationView {
 
+    @NotNull
     @Digits(integer = 10, fraction = 0)
     private int id;
 
-    @Digits(integer = 10, fraction = 0)
-    private String code;
-
+    @NotNull
     @Size(min = 2, max = 50)
     private String name;
+
+    private Boolean isActive;
 
     public int getId() {
         return id;
@@ -22,19 +24,19 @@ public class CountriesView {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }
