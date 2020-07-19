@@ -61,7 +61,7 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public void Update(OfficeFilter officeFilter) {
+    public void update(OfficeFilter officeFilter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaUpdate<Office> builderCriteriaUpdate = criteriaBuilder.createCriteriaUpdate(Office.class);
         Root<Office> officeRoot = builderCriteriaUpdate.from(Office.class);
@@ -74,11 +74,14 @@ public class OfficeDaoImpl implements OfficeDao {
         if (officeFilter.getActive() != null) {
             builderCriteriaUpdate.set(officeRoot.get(Office_.isActive), officeFilter.getActive());
         }
-        entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
+        int rowsUpdated = entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
+        if (rowsUpdated != 1) {
+            //todo
+        }
     }
 
     @Override
-    public void Save(Office office) {
+    public void save(Office office) {
         entityManager.persist(office);
     }
 }

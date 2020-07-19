@@ -11,7 +11,7 @@ public interface UserDao {
 
     User loadById(int id);
 
-    void Update(UserFilter userFilter);
+    void update(UserFilter userFilter);
 
-    void Save(User user);
+    void save(User user);
 }

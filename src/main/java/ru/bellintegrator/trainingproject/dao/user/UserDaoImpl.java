@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void Update(UserFilter userFilter) {
+    public void update(UserFilter userFilter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaUpdate<User> builderCriteriaUpdate = criteriaBuilder.createCriteriaUpdate(User.class);
         Root<User> userRoot = builderCriteriaUpdate.from(User.class);
@@ -124,11 +124,14 @@ public class UserDaoImpl implements UserDao {
         if (userFilter.getIdentified() != null) {
             builderCriteriaUpdate.set(userRoot.get(User_.isIdentified), userFilter.getIdentified());
         }
-        entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
+        int rowsUpdated = entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
+        if (rowsUpdated != 1) {
+            //todo
+        }
     }
 
     @Override
-    public void Save(User user) {
+    public void save(User user) {
         entityManager.persist(user);
     }
 }

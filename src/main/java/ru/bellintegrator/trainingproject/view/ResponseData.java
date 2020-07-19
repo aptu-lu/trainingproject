@@ -1,6 +1,7 @@
 package ru.bellintegrator.trainingproject.view;
 
-public class Data {
+public class ResponseData {
+
     private Object data;
 
     public Object getData() {

@@ -11,7 +11,7 @@ public interface OfficeDao {
 
     Office loadById(int id);
 
-    void Update(OfficeFilter officeFilter);
+    void update(OfficeFilter officeFilter);
 
-    void Save(Office office);
+    void save(Office office);
 }
