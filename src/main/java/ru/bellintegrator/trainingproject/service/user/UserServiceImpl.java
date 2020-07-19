@@ -3,6 +3,7 @@ package ru.bellintegrator.trainingproject.service.user;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.trainingproject.dao.user.UserDao;
 import ru.bellintegrator.trainingproject.filter.UserFilter;
 import ru.bellintegrator.trainingproject.model.User;
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public ResponseData getList(UserFilter userFilter) {
         List<User> list = userDao.list(userFilter);
         List<ListUserView> listUserViews = list.stream()
@@ -38,6 +40,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public ResponseData get(int id) {
         User user = userDao.loadById(id);
         UserView userView = mapperFacade.map(user, UserView.class);
@@ -47,6 +50,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public ResponseData update(UserFilter userFilter) {
         userDao.update(userFilter);
         ResponseData responseData = new ResponseData();
@@ -55,6 +59,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public ResponseData add(UserFilter userFilter) {
         User user = mapperFacade.map(userFilter, User.class);
         userDao.save(user);

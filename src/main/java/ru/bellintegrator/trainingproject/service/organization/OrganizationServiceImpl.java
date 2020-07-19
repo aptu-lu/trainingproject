@@ -3,6 +3,7 @@ package ru.bellintegrator.trainingproject.service.organization;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.trainingproject.dao.organization.OrganizationDao;
 import ru.bellintegrator.trainingproject.filter.OrganizationFilter;
 import ru.bellintegrator.trainingproject.model.Organization;
@@ -27,6 +28,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @Transactional
     public ResponseData getList(OrganizationFilter organizationFilter) {
         List<Organization> list = organizationDao.list(organizationFilter);
         List<ListOrganizationView> listOrganizationViews = list.stream()
@@ -38,6 +40,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @Transactional
     public ResponseData get(int id) {
         Organization organization = organizationDao.loadById(id);
         OrganizationView organizationView = mapperFacade.map(organization, OrganizationView.class);
@@ -47,6 +50,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @Transactional
     public ResponseData update(OrganizationFilter organizationFilter) {
         organizationDao.update(organizationFilter);
         ResponseData responseData = new ResponseData();
@@ -55,6 +59,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @Transactional
     public ResponseData add(OrganizationFilter organizationFilter) {
         Organization organization = mapperFacade.map(organizationFilter, Organization.class);
         organizationDao.save(organization);

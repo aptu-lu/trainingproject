@@ -3,6 +3,7 @@ package ru.bellintegrator.trainingproject.service.docs;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.trainingproject.dao.docs.DocsDao;
 import ru.bellintegrator.trainingproject.model.Docs;
 import ru.bellintegrator.trainingproject.view.ResponseData;
@@ -24,6 +25,7 @@ public class DocsServiceImpl implements DocsService {
     }
 
     @Override
+    @Transactional
     public ResponseData list() {
         List<Docs> list = docsDao.list();
         List<ListDocsView> listDocsViews = list.stream()

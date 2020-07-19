@@ -3,6 +3,7 @@ package ru.bellintegrator.trainingproject.service.countries;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.trainingproject.dao.countries.CountriesDao;
 import ru.bellintegrator.trainingproject.model.Countries;
 import ru.bellintegrator.trainingproject.view.ResponseData;
@@ -24,6 +25,7 @@ public class CountriesServiceImpl implements CountriesService {
     }
 
     @Override
+    @Transactional
     public ResponseData list() {
         List<Countries> list = countriesDao.list();
         List<ListCountriesView> listDocsViews = list.stream()

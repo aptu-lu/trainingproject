@@ -3,6 +3,7 @@ package ru.bellintegrator.trainingproject.service.office;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.trainingproject.dao.office.OfficeDao;
 import ru.bellintegrator.trainingproject.filter.OfficeFilter;
 import ru.bellintegrator.trainingproject.model.Office;
@@ -27,6 +28,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    @Transactional
     public ResponseData getList(OfficeFilter officeFilter) {
         List<Office> list = officeDao.list(officeFilter);
         List<ListOfficeView> listOfficeViews = list.stream()
@@ -38,6 +40,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    @Transactional
     public ResponseData get(int id) {
         Office office = officeDao.loadById(id);
         OfficeView officeView = mapperFacade.map(office, OfficeView.class);
@@ -47,6 +50,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    @Transactional
     public ResponseData update(OfficeFilter officeFilter) {
         officeDao.update(officeFilter);
         ResponseData responseData = new ResponseData();
@@ -55,6 +59,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    @Transactional
     public ResponseData add(OfficeFilter officeFilter) {
         Office office = mapperFacade.map(officeFilter, Office.class);
         officeDao.save(office);
