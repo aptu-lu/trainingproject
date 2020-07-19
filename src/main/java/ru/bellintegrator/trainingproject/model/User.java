@@ -1,16 +1,6 @@
 package ru.bellintegrator.trainingproject.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Version;
-import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "User")
@@ -26,7 +16,7 @@ public class User {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_id")
-    private Office officeId;
+    private Office office;
 
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
@@ -43,15 +33,26 @@ public class User {
     @Column(name = "phone", length = 50)
     private String phone;
 
-    @Column(name = "is_identified")
-    private boolean isIdentified;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserDoc userDoc;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "citizenship_id")
-    private Countries citizenshipId;
+    private Countries countries;
+
+    @Column(name = "is_identified")
+    private Boolean isIdentified;
 
     public int getId() {
         return id;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
     }
 
     public String getFirstName() {
@@ -94,27 +95,27 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean isIdentified() {
+    public UserDoc getUserDoc() {
+        return userDoc;
+    }
+
+    public void setUserDoc(UserDoc userDoc) {
+        this.userDoc = userDoc;
+    }
+
+    public Countries getCountries() {
+        return countries;
+    }
+
+    public void setCountries(Countries countries) {
+        this.countries = countries;
+    }
+
+    public Boolean getIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
-    }
-
-    public Countries getCitizenshipId() {
-        return citizenshipId;
-    }
-
-    public void setCitizenshipId(Countries citizenshipId) {
-        this.citizenshipId = citizenshipId;
-    }
-
-    public Office getOfficeId() {
-        return officeId;
-    }
-
-    public void setOfficeId(Office officeId) {
-        this.officeId = officeId;
     }
 }

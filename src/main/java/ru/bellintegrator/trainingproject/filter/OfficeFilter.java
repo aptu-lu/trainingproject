@@ -1,18 +1,18 @@
-package ru.bellintegrator.trainingproject.dto;
+package ru.bellintegrator.trainingproject.filter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class OfficeDto {
+public class OfficeFilter {
 
-    @NotNull(groups = {MarkerValidate.Get.class, MarkerValidate.Update.class})
-    @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.Get.class,MarkerValidate.Update.class})
-    private int id;
+    @NotNull(groups = MarkerValidate.Update.class)
+    @Pattern(regexp = "^[0-9]+$", groups = MarkerValidate.Update.class)
+    private Integer id;
 
     @NotNull(groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.List.class,MarkerValidate.Save.class})
-    private int orgId;
+    private Integer orgId;
 
     @NotNull(groups = MarkerValidate.Update.class)
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
@@ -26,21 +26,21 @@ public class OfficeDto {
             groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String phone;
 
-    private boolean isActive;
+    private Boolean isActive;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getOrgId() {
+    public Integer getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(int orgId) {
+    public void setOrgId(Integer orgId) {
         this.orgId = orgId;
     }
 
@@ -68,11 +68,11 @@ public class OfficeDto {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean getActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

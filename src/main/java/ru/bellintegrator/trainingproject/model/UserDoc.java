@@ -17,25 +17,25 @@ import java.time.LocalDate;
 public class UserDoc {
 
     @Id
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "user_id")
     private int id;
 
     @Version
     private int version;
 
+    @MapsId
+    @OneToOne(mappedBy = "userDoc", fetch = FetchType.LAZY)
+    private User user;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_id", nullable = false)
-    private int docId;
+    private Docs docs;
 
     @Column(name = "doc_date", nullable = false)
     private LocalDate docDate;
 
     @Column(name = "doc_number", length = 50, nullable = false)
     private String docNumber;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private User user;
 
     public User getUser() {
         return user;
@@ -49,12 +49,12 @@ public class UserDoc {
         return id;
     }
 
-    public int getDocId() {
-        return docId;
+    public Docs getDocs() {
+        return docs;
     }
 
-    public void setDocId(int docId) {
-        this.docId = docId;
+    public void setDocs(Docs docs) {
+        this.docs = docs;
     }
 
     public LocalDate getDocDate() {

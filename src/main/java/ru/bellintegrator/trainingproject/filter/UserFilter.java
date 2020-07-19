@@ -1,4 +1,4 @@
-package ru.bellintegrator.trainingproject.dto;
+package ru.bellintegrator.trainingproject.filter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -6,15 +6,15 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-public class UserDto {
+public class UserFilter {
 
-    @NotNull(groups = {MarkerValidate.Get.class,MarkerValidate.Update.class})
-    @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.Get.class, MarkerValidate.Update.class})
-    private int id;
+    @NotNull(groups = MarkerValidate.Update.class)
+    @Pattern(regexp = "^[0-9]+$", groups = MarkerValidate.Update.class)
+    private Integer id;
 
     @NotNull(groups = {MarkerValidate.List.class,MarkerValidate.Save.class})
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
-    private int officeId;
+    private Integer officeId;
 
     @NotNull(groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
@@ -34,8 +34,8 @@ public class UserDto {
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String position;
 
-    @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
-    private String docCode;
+    @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
+    private String docName;
 
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String docNumber;
@@ -46,21 +46,21 @@ public class UserDto {
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String citizenshipCode;
 
-    private boolean isIdentified;
+    private Boolean isIdentified;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getOfficeId() {
+    public Integer getOfficeId() {
         return officeId;
     }
 
-    public void setOfficeId(int officeId) {
+    public void setOfficeId(Integer officeId) {
         this.officeId = officeId;
     }
 
@@ -104,6 +104,14 @@ public class UserDto {
         this.position = position;
     }
 
+    public String getDocName() {
+        return docName;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
+    }
+
     public String getDocNumber() {
         return docNumber;
     }
@@ -120,14 +128,6 @@ public class UserDto {
         this.docDate = docDate;
     }
 
-    public String getDocCode() {
-        return docCode;
-    }
-
-    public void setDocCode(String docCode) {
-        this.docCode = docCode;
-    }
-
     public String getCitizenshipCode() {
         return citizenshipCode;
     }
@@ -136,11 +136,11 @@ public class UserDto {
         this.citizenshipCode = citizenshipCode;
     }
 
-    public boolean isIdentified() {
+    public Boolean getIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
     }
 }

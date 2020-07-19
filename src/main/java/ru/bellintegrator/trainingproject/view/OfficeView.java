@@ -7,15 +7,15 @@ import javax.validation.constraints.Size;
 
 public class OfficeView {
 
-    @NotNull(groups = {MarkerValidate.List.class, MarkerValidate.Get.class, MarkerValidate.Update.class})
+    @NotNull
     @Digits(integer = 10, fraction = 0)
     private int id;
 
-    @NotNull(groups = MarkerValidate.Update.class)
+    @NotNull
     @Size(min = 2, max = 50)
     private String name;
 
-    @NotNull(groups = MarkerValidate.Update.class)
+    @NotNull
     @Size(min = 2, max = 50)
     private String address;
 

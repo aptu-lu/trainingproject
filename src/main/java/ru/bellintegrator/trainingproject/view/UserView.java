@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 public class UserView {
 
-    @NotNull(groups = {MarkerValidate.Get.class,MarkerValidate.Update.class})
+    @NotNull
     @Digits(integer = 10, fraction = 0)
     private int id;
 
-    @NotNull(groups = {MarkerValidate.Update.class,MarkerValidate.Save.class})
+    @NotNull
     @Size(min = 2, max = 50)
     private String firstName;
 
@@ -23,7 +23,7 @@ public class UserView {
     @Size(min = 2, max = 50)
     private String middleName;
 
-    @NotNull(groups = {MarkerValidate.Update.class,MarkerValidate.Save.class})
+    @NotNull
     @Size(min = 2, max = 50)
     private String position;
 

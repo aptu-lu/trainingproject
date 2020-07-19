@@ -31,14 +31,13 @@ CREATE TABLE IF NOT EXISTS User (
     middle_name       VARCHAR(50)          COMMENT 'Отчество'
     position          VARCHAR(50) NOT NULL COMMENT 'Позиция'
     phone             VARCHAR(50)          COMMENT 'Номер телефона'
-    user_doc_id       INTEGER              COMMENT 'Уникальный идентификатор документа пользователя'
     citizenship_id    INTEGER              COMMENT 'Уникальный идентификатор гражданства'
     is_identified     BOOLEAN              COMMENT 'Идентифицированный ли'
 );
 COMMENT ON TABLE User IS 'Пользователь';
 
 CREATE TABLE IF NOT EXISTS User_Doc (
-    id         INTEGER NOT NULL     COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    user_id    INTEGER NOT NULL     COMMENT 'Уникальный идентификатор пользователя' PRIMARY KEY ,
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
     doc_id     INTEGER NOT NULL     COMMENT 'Уникальный идентификатор справочника документов',
     doc_date   DATE NOT NULL        COMMENT 'Дата'
@@ -67,9 +66,6 @@ ALTER TABLE Office ADD FOREIGN KEY (org_id) REFERENCES Organization(id);
 
 CREATE INDEX IX_User_office_id ON User (office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
-
-CREATE INDEX IX_User_user_doc_id ON User (user_doc_id);
-ALTER TABLE User ADD FOREIGN KEY (user_doc_id) REFERENCES User_Doc(id);
 
 CREATE INDEX IX_User_citizenship_id ON User (citizenship_id);
 ALTER TABLE User ADD FOREIGN KEY (citizenship_id) REFERENCES Countries(id);

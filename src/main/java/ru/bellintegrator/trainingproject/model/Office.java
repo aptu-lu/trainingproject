@@ -38,7 +38,7 @@ public class Office {
     private String phone;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     public int getId() {
         return id;
@@ -68,19 +68,19 @@ public class Office {
         this.phone = phone;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     public Organization getOrganization() {
         return organization;
     }
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public Boolean getActive() {
+        return isActive;
     }
 }

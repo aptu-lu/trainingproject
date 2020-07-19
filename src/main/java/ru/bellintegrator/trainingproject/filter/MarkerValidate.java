@@ -1,12 +1,10 @@
-package ru.bellintegrator.trainingproject.dto;
+package ru.bellintegrator.trainingproject.filter;
 
 public interface MarkerValidate {
 
     interface List {}
 
     interface Save {}
-
-    interface Get {}
 
     interface Update {}
 }

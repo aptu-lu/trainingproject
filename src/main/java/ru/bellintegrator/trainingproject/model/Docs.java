@@ -21,7 +21,7 @@ public class Docs {
     private int version;
 
     @Column(name = "code", length = 50, nullable = false)
-    private String dode;
+    private String code;
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;
@@ -30,12 +30,12 @@ public class Docs {
         return id;
     }
 
-    public String getDode() {
-        return dode;
+    public String getCode() {
+        return code;
     }
 
-    public void setDode(String dode) {
-        this.dode = dode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
