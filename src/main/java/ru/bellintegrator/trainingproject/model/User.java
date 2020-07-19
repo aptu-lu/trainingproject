@@ -14,10 +14,6 @@ public class User {
     @Version
     private int version;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "office_id")
-    private Office office;
-
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
@@ -33,15 +29,19 @@ public class User {
     @Column(name = "phone", length = 50)
     private String phone;
 
+    @Column(name = "is_identified")
+    private Boolean isIdentified;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "office_id")
+    private Office office;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserDoc userDoc;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "citizenship_id")
     private Countries countries;
-
-    @Column(name = "is_identified")
-    private Boolean isIdentified;
 
     public int getId() {
         return id;

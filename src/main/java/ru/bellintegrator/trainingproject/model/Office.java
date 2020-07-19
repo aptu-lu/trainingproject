@@ -24,10 +24,6 @@ public class Office {
     @Version
     private int version;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "org_id")
-    private Organization organization;
-
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
@@ -39,6 +35,10 @@ public class Office {
 
     @Column(name = "is_active")
     private Boolean isActive;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "org_id")
+    private Organization organization;
 
     public int getId() {
         return id;
