@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bellintegrator.trainingproject.service.docs.DocsService;
-import ru.bellintegrator.trainingproject.view.ResponseData;
+import ru.bellintegrator.trainingproject.view.docs.ListDocsView;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -21,8 +23,7 @@ public class DocsController {
     }
 
     @GetMapping
-    public ResponseData list() {
-        ResponseData responseData = docsService.list();
-        return responseData;
+    public List<ListDocsView> list() {
+        return docsService.list();
     }
 }

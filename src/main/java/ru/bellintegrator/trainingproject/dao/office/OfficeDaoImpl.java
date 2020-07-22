@@ -62,6 +62,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public void update(OfficeFilter officeFilter) {
+        //todo bez criteria
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaUpdate<Office> builderCriteriaUpdate = criteriaBuilder.createCriteriaUpdate(Office.class);
         Root<Office> officeRoot = builderCriteriaUpdate.from(Office.class);

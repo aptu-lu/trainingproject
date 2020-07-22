@@ -1,18 +1,18 @@
 package ru.bellintegrator.trainingproject.service.organization;
 
-import org.springframework.validation.annotation.Validated;
-import ru.bellintegrator.trainingproject.filter.MarkerValidate;
 import ru.bellintegrator.trainingproject.filter.OrganizationFilter;
-import ru.bellintegrator.trainingproject.view.ResponseData;
+import ru.bellintegrator.trainingproject.view.organization.ListOrganizationView;
+import ru.bellintegrator.trainingproject.view.organization.OrganizationView;
 
-@Validated
+import java.util.List;
+
 public interface OrganizationService {
 
-    ResponseData getList(@Validated(MarkerValidate.List.class) OrganizationFilter organizationFilter);
+    List<ListOrganizationView> getList(OrganizationFilter organizationFilter);
 
-    ResponseData get(int id);
+    OrganizationView get(int id);
 
-    ResponseData update(@Validated(MarkerValidate.Update.class) OrganizationFilter organizationFilter);
+    void update(OrganizationFilter organizationFilter);
 
-    ResponseData add(@Validated(MarkerValidate.Save.class) OrganizationFilter organizationFilter);
+    void add(OrganizationFilter organizationFilter);
 }

@@ -1,8 +1,10 @@
 package ru.bellintegrator.trainingproject.service.countries;
 
-import ru.bellintegrator.trainingproject.view.ResponseData;
+import ru.bellintegrator.trainingproject.view.countries.ListCountriesView;
+
+import java.util.List;
 
 public interface CountriesService {
 
-    ResponseData list();
+    List<ListCountriesView> list();
 }

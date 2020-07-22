@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.trainingproject.dao.countries.CountriesDao;
 import ru.bellintegrator.trainingproject.model.Countries;
-import ru.bellintegrator.trainingproject.view.ResponseData;
 import ru.bellintegrator.trainingproject.view.countries.ListCountriesView;
 
 import java.util.List;
@@ -26,13 +25,11 @@ public class CountriesServiceImpl implements CountriesService {
 
     @Override
     @Transactional
-    public ResponseData list() {
+    public List<ListCountriesView> list() {
         List<Countries> list = countriesDao.list();
         List<ListCountriesView> listDocsViews = list.stream()
                 .map((countries -> mapperFacade.map(countries, ListCountriesView.class)))
                 .collect(Collectors.toList());
-        ResponseData responseData = new ResponseData();
-        responseData.setData(listDocsViews);
-        return responseData;
+        return listDocsViews;
     }
 }

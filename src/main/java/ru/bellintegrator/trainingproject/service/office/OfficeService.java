@@ -1,17 +1,19 @@
 package ru.bellintegrator.trainingproject.service.office;
 
-import org.springframework.validation.annotation.Validated;
-import ru.bellintegrator.trainingproject.filter.MarkerValidate;
 import ru.bellintegrator.trainingproject.filter.OfficeFilter;
-import ru.bellintegrator.trainingproject.view.ResponseData;
+import ru.bellintegrator.trainingproject.view.office.ListOfficeView;
+import ru.bellintegrator.trainingproject.view.office.OfficeView;
+
+import java.util.List;
+
 
 public interface OfficeService {
 
-    ResponseData getList(@Validated(MarkerValidate.List.class) OfficeFilter officeFilter);
+    List<ListOfficeView> getList(OfficeFilter officeFilter);
 
-    ResponseData get(int id);
+    OfficeView get(int id);
 
-    ResponseData update(@Validated(MarkerValidate.Update.class) OfficeFilter officeFilter);
+    void update(OfficeFilter officeFilter);
 
-    ResponseData add(@Validated(MarkerValidate.Save.class) OfficeFilter officeFilter);
+    void add(OfficeFilter officeFilter);
 }

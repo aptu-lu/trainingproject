@@ -1,17 +1,18 @@
 package ru.bellintegrator.trainingproject.service.user;
 
-import org.springframework.validation.annotation.Validated;
-import ru.bellintegrator.trainingproject.filter.MarkerValidate;
 import ru.bellintegrator.trainingproject.filter.UserFilter;
-import ru.bellintegrator.trainingproject.view.ResponseData;
+import ru.bellintegrator.trainingproject.view.user.ListUserView;
+import ru.bellintegrator.trainingproject.view.user.UserView;
+
+import java.util.List;
 
 public interface UserService {
 
-    ResponseData getList(@Validated(MarkerValidate.List.class) UserFilter userFilter);
+    List<ListUserView> getList(UserFilter userFilter);
 
-    ResponseData get(int id);
+    UserView get(int id);
 
-    ResponseData update(@Validated(MarkerValidate.Update.class) UserFilter userFilter);
+    void update(UserFilter userFilter);
 
-    ResponseData add(@Validated(MarkerValidate.Save.class) UserFilter userFilter);
+    void add(UserFilter userFilter);
 }

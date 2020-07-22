@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bellintegrator.trainingproject.service.countries.CountriesService;
-import ru.bellintegrator.trainingproject.view.ResponseData;
+import ru.bellintegrator.trainingproject.view.countries.ListCountriesView;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -21,8 +23,7 @@ public class CountriesController {
     }
 
     @GetMapping
-    public ResponseData list() {
-        ResponseData responseData = countriesService.list();
-        return responseData;
+    public List<ListCountriesView> list() {
+        return countriesService.list();
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.trainingproject.dao.docs.DocsDao;
 import ru.bellintegrator.trainingproject.model.Docs;
-import ru.bellintegrator.trainingproject.view.ResponseData;
 import ru.bellintegrator.trainingproject.view.docs.ListDocsView;
 
 import java.util.List;
@@ -26,13 +25,11 @@ public class DocsServiceImpl implements DocsService {
 
     @Override
     @Transactional
-    public ResponseData list() {
+    public List<ListDocsView> list() {
         List<Docs> list = docsDao.list();
         List<ListDocsView> listDocsViews = list.stream()
                 .map((docs -> mapperFacade.map(docs, ListDocsView.class)))
                 .collect(Collectors.toList());
-        ResponseData responseData = new ResponseData();
-        responseData.setData(listDocsViews);
-        return responseData;
+        return listDocsViews;
     }
 }
