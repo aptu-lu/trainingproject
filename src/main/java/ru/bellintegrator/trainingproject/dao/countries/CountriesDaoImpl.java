@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class CountriesDaoImpl implements CountriesDao{
 
@@ -18,6 +21,9 @@ public class CountriesDaoImpl implements CountriesDao{
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Countries> list() {
         String LOAD_BY_ID = "SELECT c FROM Countries c";
@@ -25,6 +31,9 @@ public class CountriesDaoImpl implements CountriesDao{
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Countries loadByCode(String code) {
         String LOAD_BY_CODE = "SELECT c FROM Countries c WHERE c.code = :code";

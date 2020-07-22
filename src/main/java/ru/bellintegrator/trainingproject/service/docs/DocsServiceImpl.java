@@ -11,6 +11,9 @@ import ru.bellintegrator.trainingproject.view.docs.ListDocsView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class DocsServiceImpl implements DocsService {
 
@@ -23,6 +26,9 @@ public class DocsServiceImpl implements DocsService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<ListDocsView> list() {

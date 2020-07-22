@@ -1,15 +1,33 @@
 package ru.bellintegrator.trainingproject.view.office;
 
+/**
+ * Представление офиса
+ */
 public class OfficeView {
 
+    /**
+     * Уникальный идентификатор
+     */
     private int id;
 
+    /**
+     * Название
+     */
     private String name;
 
+    /**
+     * Адресс
+     */
     private String address;
 
+    /**
+     * Телефон
+     */
     private String phone;
 
+    /**
+     * Действителен ли
+     */
     private Boolean isActive;
 
     public int getId() {

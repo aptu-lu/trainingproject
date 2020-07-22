@@ -1,7 +1,13 @@
 package ru.bellintegrator.trainingproject.view;
 
+/**
+ * Представление результата
+ */
 public class ResponseResult {
 
+    /**
+     * Результат
+     */
     private Object data;
 
     public Object getData() {

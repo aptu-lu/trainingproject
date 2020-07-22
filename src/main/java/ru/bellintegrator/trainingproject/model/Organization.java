@@ -8,36 +8,66 @@ import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import javax.persistence.Version;
 
+/**
+ * Организация
+ */
 @Entity
 @Table(name = "Organization")
 public class Organization {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private int version;
 
+    /**
+     * Название
+     */
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    /**
+     * Полное название
+     */
     @Column(name = "full_name", length = 50, nullable = false)
     private String fullName;
 
+    /**
+     * ИНН
+     */
     @Column(name = "inn", length = 50, nullable = false)
     private String inn;
 
+    /**
+     * КПП
+     */
     @Column(name = "kpp", length = 50, nullable = false)
     private String kpp;
 
+    /**
+     * Адресс
+     */
     @Column(name = "address", length = 50, nullable = false)
     private String address;
 
+    /**
+     * Телефон
+     */
     @Column(name = "phone", length = 50)
     private String phone;
 
+    /**
+     * Действетелен ли
+     */
     @Column(name = "is_active")
     private Boolean isActive;
 

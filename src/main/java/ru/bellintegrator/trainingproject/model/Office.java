@@ -12,27 +12,48 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
+/**
+ * Офис
+ */
 @Entity
 @Table(name = "Office")
 public class Office {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private int version;
 
+    /**
+     * Название
+     */
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    /**
+     * Адресс
+     */
     @Column(name = "address", length = 50, nullable = false)
     private String address;
 
+    /**
+     * Телефон
+     */
     @Column(name = "phone", length = 50)
     private String phone;
 
+    /**
+     * Действителен ли
+     */
     @Column(name = "is_active")
     private Boolean isActive;
 

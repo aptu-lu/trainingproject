@@ -15,6 +15,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class OfficeDaoImpl implements OfficeDao {
 
@@ -25,6 +28,9 @@ public class OfficeDaoImpl implements OfficeDao {
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Office> list(OfficeFilter officeFilter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -49,6 +55,9 @@ public class OfficeDaoImpl implements OfficeDao {
         return entityManager.createQuery(builderQuery).getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Office loadById(int id) {
         String LOAD_BY_ID = "SELECT o FROM Office o LEFT JOIN FETCH o.organization WHERE o.id = :id";
@@ -57,6 +66,9 @@ public class OfficeDaoImpl implements OfficeDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(OfficeFilter officeFilter) {
         Office office = loadById(officeFilter.getId());
@@ -70,6 +82,9 @@ public class OfficeDaoImpl implements OfficeDao {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(Office office) {
         entityManager.persist(office);

@@ -14,6 +14,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class OrganizationDaoImpl implements OrganizationDao {
 
@@ -24,6 +27,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Organization> list(OrganizationFilter organizationFilter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -43,6 +49,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         return entityManager.createQuery(builderQuery).getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Organization loadById(int id) {
         String LOAD_BY_ID = "SELECT o FROM Organization o WHERE o.id = :id";
@@ -51,6 +60,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(OrganizationFilter organizationFilter) {
         Organization organization = loadById(organizationFilter.getId());
@@ -67,6 +79,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(Organization organization) {
         entityManager.persist(organization);

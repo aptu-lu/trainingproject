@@ -6,46 +6,85 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+/**
+ * Фильтр User
+ */
 public class UserFilter {
 
+    /**
+     * Уникальный идентификатор
+     */
     @NotNull(groups = MarkerValidate.Update.class)
     @Pattern(regexp = "^[0-9]+$", groups = MarkerValidate.Update.class)
     private Integer id;
 
+    /**
+     * Уникальный идентификатор офиса
+     */
     @NotNull(groups = {MarkerValidate.List.class,MarkerValidate.Save.class})
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
     private Integer officeId;
 
+    /**
+     * Имя
+     */
     @NotNull(groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String firstName;
 
+    /**
+     * Фамилия
+     */
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String lastName;
 
+    /**
+     * Отчество
+     */
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String middleName;
 
+    /**
+     * Телефон
+     */
     @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$",
             groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String phone;
 
+    /**
+     * Позиция
+     */
     @NotNull(groups = {MarkerValidate.Update.class,MarkerValidate.Save.class})
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String position;
 
+    /**
+     * Название документа
+     */
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
     private String docName;
 
+    /**
+     * Номер документа
+     */
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String docNumber;
 
+    /**
+     * Дата документа
+     */
     @Past(groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     private LocalDate docDate;
 
+    /**
+     * Код страны
+     */
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String citizenshipCode;
 
+    /**
+     * Идентифицирован ли
+     */
     private Boolean isIdentified;
 
     public Integer getId() {

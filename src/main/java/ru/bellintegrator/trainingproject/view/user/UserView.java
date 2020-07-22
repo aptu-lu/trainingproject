@@ -2,30 +2,69 @@ package ru.bellintegrator.trainingproject.view.user;
 
 import java.time.LocalDate;
 
+/**
+ * Представление пользователя
+ */
 public class UserView {
 
+    /**
+     * Уникальный идентификатор
+     */
     private int id;
 
+    /**
+     * Имя
+     */
     private String firstName;
 
+    /**
+     * Фамилия
+     */
     private String lastName;
 
+    /**
+     * Отчество
+     */
     private String middleName;
 
+    /**
+     * Позиция
+     */
     private String position;
 
+    /**
+     * Телефон
+     */
     private String phone;
 
+    /**
+     * Название документа
+     */
     private String docName;
 
+    /**
+     * Номер документа
+     */
     private String docNumber;
 
+    /**
+     * Дата документа
+     */
     private LocalDate docDate;
 
+    /**
+     * Название страны
+     */
     private String citizenshipName;
 
+    /**
+     * Код страны
+     */
     private String citizenshipCode;
 
+    /**
+     * Идентифицирован ли
+     */
     private Boolean isIdentified;
 
     public int getId() {

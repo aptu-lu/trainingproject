@@ -4,35 +4,62 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * Фильтр Organization
+ */
 public class OrganizationFilter {
 
+    /**
+     * Уникальный идентификатор
+     */
     @NotNull(groups = MarkerValidate.Update.class)
     @Pattern(regexp = "^[0-9]+$", groups = MarkerValidate.Update.class)
     private Integer id;
 
+    /**
+     * Название
+     */
     @NotNull(groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String name;
 
+    /**
+     * Полное название
+     */
     @NotNull(groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     @Size(min = 2, max = 50, groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String fullName;
 
+    /**
+     * ИНН
+     */
     @NotNull(groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String inn;
 
+    /**
+     * КПП
+     */
     @NotNull(groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String kpp;
 
+    /**
+     * Адресс
+     */
     @NotNull(groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     @Size(min = 2, max = 50, groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String address;
 
+    /**
+     * Телефон
+     */
     @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$", groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
     private String phone;
 
+    /**
+     * Действителен ли
+     */
     private Boolean isActive;
 
     public Integer getId() {

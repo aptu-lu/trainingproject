@@ -1,11 +1,23 @@
 package ru.bellintegrator.trainingproject.view.organization;
 
+/**
+ * Представление списка организации
+ */
 public class ListOrganizationView {
 
+    /**
+     * Уникальный идентификатор
+     */
     private int id;
 
+    /**
+     * Название
+     */
     private String name;
 
+    /**
+     * Действителен ли
+     */
     private Boolean isActive;
 
     public int getId() {

@@ -1,15 +1,33 @@
 package ru.bellintegrator.trainingproject.view.user;
 
+/**
+ * Представление списка пользователей
+ */
 public class ListUserView {
 
+    /**
+     * Уникальный идентификатор
+     */
     private int id;
 
+    /**
+     * Имя
+     */
     private String firstName;
 
+    /**
+     * Фамилия
+     */
     private String lastName;
 
+    /**
+     * Отчество
+     */
     private String middleName;
 
+    /**
+     * Позиция
+     */
     private String position;
 
     public int getId() {

@@ -8,21 +8,36 @@ import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import javax.persistence.Version;
 
+/**
+ * Документ
+ */
 @Entity
 @Table(name = "Docs")
 public class Docs {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private int version;
 
+    /**
+     * Код
+     */
     @Column(name = "code", length = 50, nullable = false)
     private String code;
 
+    /**
+     * Название
+     */
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 

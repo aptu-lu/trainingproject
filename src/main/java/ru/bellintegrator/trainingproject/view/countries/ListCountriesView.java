@@ -1,9 +1,18 @@
 package ru.bellintegrator.trainingproject.view.countries;
 
+/**
+ * Представление списка стран
+ */
 public class ListCountriesView {
 
+    /**
+     * Код
+     */
     private String code;
 
+    /**
+     * Название
+     */
     private String name;
 
     public String getCode() {

@@ -13,33 +13,60 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * Пользователь
+ */
 @Entity
 @Table(name = "User")
 public class User {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private int version;
 
+    /**
+     * Имя
+     */
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
+    /**
+     * Фамилия
+     */
     @Column(name = "last_name", length = 50)
     private String lastName;
 
+    /**
+     * Отчество
+     */
     @Column(name = "middle_name", length = 50)
     private String middleName;
 
+    /**
+     * Позиция
+     */
     @Column(name = "position", length = 50, nullable = false)
     private String position;
 
+    /**
+     * Телефон
+     */
     @Column(name = "phone", length = 50)
     private String phone;
 
+    /**
+     * Идентифицирован ли
+     */
     @Column(name = "is_identified")
     private Boolean isIdentified;
 

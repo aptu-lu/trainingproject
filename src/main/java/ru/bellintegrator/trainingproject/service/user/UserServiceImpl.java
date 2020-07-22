@@ -13,6 +13,9 @@ import ru.bellintegrator.trainingproject.view.user.UserView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -25,6 +28,9 @@ public class UserServiceImpl implements UserService{
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<ListUserView> getList(UserFilter userFilter) {
@@ -35,6 +41,9 @@ public class UserServiceImpl implements UserService{
         return listUserViews;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public UserView get(int id) {
@@ -43,12 +52,18 @@ public class UserServiceImpl implements UserService{
         return userView;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void update(UserFilter userFilter) {
         userDao.update(userFilter);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void add(UserFilter userFilter) {

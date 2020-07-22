@@ -13,6 +13,9 @@ import ru.bellintegrator.trainingproject.view.organization.OrganizationView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
@@ -25,6 +28,9 @@ public class OrganizationServiceImpl implements OrganizationService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<ListOrganizationView> getList(OrganizationFilter organizationFilter) {
@@ -35,6 +41,9 @@ public class OrganizationServiceImpl implements OrganizationService {
         return listOrganizationViews;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public OrganizationView get(int id) {
@@ -43,12 +52,18 @@ public class OrganizationServiceImpl implements OrganizationService {
         return organizationView;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void update(OrganizationFilter organizationFilter) {
         organizationDao.update(organizationFilter);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void add(OrganizationFilter organizationFilter) {

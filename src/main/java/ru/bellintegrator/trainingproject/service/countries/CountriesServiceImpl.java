@@ -11,6 +11,9 @@ import ru.bellintegrator.trainingproject.view.countries.ListCountriesView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class CountriesServiceImpl implements CountriesService {
 
@@ -23,6 +26,9 @@ public class CountriesServiceImpl implements CountriesService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<ListCountriesView> list() {

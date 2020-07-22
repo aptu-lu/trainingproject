@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class DocsDaoImpl implements DocsDao {
 
@@ -18,6 +21,9 @@ public class DocsDaoImpl implements DocsDao {
         this.entityManager = entityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Docs> list() {
         String LOAD_BY_ID = "SELECT d FROM Docs d";
@@ -25,6 +31,9 @@ public class DocsDaoImpl implements DocsDao {
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Docs loadByName(String name) {
         String LOAD_BY_NAME = "SELECT d FROM Docs d WHERE d.name = :name";

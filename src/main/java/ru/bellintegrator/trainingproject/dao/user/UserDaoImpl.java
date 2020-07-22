@@ -16,6 +16,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -32,6 +35,9 @@ public class UserDaoImpl implements UserDao {
         this.countriesDao = countriesDao;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<User> list(UserFilter userFilter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -69,6 +75,9 @@ public class UserDaoImpl implements UserDao {
         return entityManager.createQuery(builderQuery).getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public User loadById(int id) {
         String LOAD_BY_ID = "SELECT u FROM User u LEFT JOIN FETCH u.office " +
@@ -81,6 +90,9 @@ public class UserDaoImpl implements UserDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(UserFilter userFilter) {
         User user = loadById(userFilter.getId());
@@ -118,6 +130,9 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(User user) {
         entityManager.persist(user);

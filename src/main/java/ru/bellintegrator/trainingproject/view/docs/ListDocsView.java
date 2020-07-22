@@ -1,9 +1,18 @@
 package ru.bellintegrator.trainingproject.view.docs;
 
+/**
+ * Представление списка документов
+ */
 public class ListDocsView {
 
+    /**
+     * Код
+     */
     private String code;
 
+    /**
+     * Название
+     */
     private String name;
 
     public String getCode() {

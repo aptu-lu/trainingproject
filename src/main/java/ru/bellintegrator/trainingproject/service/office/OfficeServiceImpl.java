@@ -13,6 +13,9 @@ import ru.bellintegrator.trainingproject.view.office.OfficeView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
@@ -25,6 +28,9 @@ public class OfficeServiceImpl implements OfficeService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<ListOfficeView> getList(OfficeFilter officeFilter) {
@@ -35,6 +41,9 @@ public class OfficeServiceImpl implements OfficeService {
         return listOfficeViews;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public OfficeView get(int id) {
@@ -43,12 +52,18 @@ public class OfficeServiceImpl implements OfficeService {
         return officeView;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void update(OfficeFilter officeFilter) {
         officeDao.update(officeFilter);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void add(OfficeFilter officeFilter) {

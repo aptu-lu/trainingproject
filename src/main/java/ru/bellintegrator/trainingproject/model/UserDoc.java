@@ -12,26 +12,41 @@ import javax.persistence.OneToOne;
 import javax.persistence.MapsId;
 import java.time.LocalDate;
 
+/**
+ * Документы пользователя
+ */
 @Entity
 @Table(name = "User_Doc")
 public class UserDoc {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @Column(name = "user_id")
     private int id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private int version;
+
+    /**
+     * Дата
+     */
+    @Column(name = "doc_date", nullable = false)
+    private LocalDate docDate;
+
+    /**
+     * Номер
+     */
+    @Column(name = "doc_number", length = 50, nullable = false)
+    private String docNumber;
 
     @MapsId
     @OneToOne(mappedBy = "userDoc", fetch = FetchType.LAZY)
     private User user;
-
-    @Column(name = "doc_date", nullable = false)
-    private LocalDate docDate;
-
-    @Column(name = "doc_number", length = 50, nullable = false)
-    private String docNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_id", nullable = false)
