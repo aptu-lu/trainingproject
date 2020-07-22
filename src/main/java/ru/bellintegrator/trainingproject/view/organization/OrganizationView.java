@@ -1,37 +1,19 @@
 package ru.bellintegrator.trainingproject.view.organization;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 public class OrganizationView {
 
-    @NotNull
-    @Digits(integer = 10, fraction = 0)
     private int id;
 
-    @NotNull
-    @Size(min = 2, max = 50)
     private String name;
 
-    @NotNull
-    @Size(min = 2, max = 50)
     private String fullName;
 
-    @NotNull
-    @Digits(integer = 15, fraction = 0)
     private String inn;
 
-    @NotNull
-    @Digits(integer = 15, fraction = 0)
     private String kpp;
 
-    @NotNull
-    @Size(min = 2, max = 50)
     private String address;
 
-    @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")
     private String phone;
 
     private Boolean isActive;

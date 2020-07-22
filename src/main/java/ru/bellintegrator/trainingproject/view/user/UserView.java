@@ -1,48 +1,29 @@
 package ru.bellintegrator.trainingproject.view.user;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class UserView {
 
-    @NotNull
-    @Digits(integer = 10, fraction = 0)
     private int id;
 
-    @NotNull
-    @Size(min = 2, max = 50)
     private String firstName;
 
-    @Size(min = 2, max = 50)
     private String lastName;
 
-    @Size(min = 2, max = 50)
     private String middleName;
 
-    @NotNull
-    @Size(min = 2, max = 50)
     private String position;
 
-    @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")
     private String phone;
 
-    @Size(min = 2, max = 50)
     private String docName;
 
-    @Digits(integer = 10, fraction = 0)
     private String docNumber;
 
-    @Past
     private LocalDate docDate;
 
-    @Size(min = 2, max = 50)
     private String citizenshipName;
 
-    @Digits(integer = 10, fraction = 0)
     private String citizenshipCode;
 
     private Boolean isIdentified;
