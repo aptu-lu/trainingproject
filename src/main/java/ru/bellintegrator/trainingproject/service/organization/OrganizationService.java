@@ -14,30 +14,30 @@ public interface OrganizationService {
     /**
      * Получить список организаций по фильтру
      *
-     * @param organizationFilter
-     * @return
+     * @param organizationFilter фильтр по организации
+     * @return список представлений организации
      */
     List<ListOrganizationView> getList(OrganizationFilter organizationFilter);
 
     /**
      * Получить организацию по идентификатору
      *
-     * @param id
-     * @return
+     * @param id уникальный идентификатор организации
+     * @return представление организации
      */
     OrganizationView get(int id);
 
     /**
      * Обновить организацию
      *
-     * @param organizationFilter
+     * @param organizationFilter фильтр по организации
      */
     void update(OrganizationFilter organizationFilter);
 
     /**
      * Сохранить организацию
      *
-     * @param organizationFilter
+     * @param organizationFilter фильтр по организации
      */
     void add(OrganizationFilter organizationFilter);
 }

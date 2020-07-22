@@ -12,15 +12,15 @@ public interface DocsDao {
     /**
      * Получить все объекты Docs
      *
-     * @return
+     * @return список документов
      */
     List<Docs> list();
 
     /**
      * Получить Docs по названию
      *
-     * @param name
-     * @return
+     * @param name название документа
+     * @return документ
      */
     Docs loadByName(String name);
 }

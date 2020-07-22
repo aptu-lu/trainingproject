@@ -13,30 +13,30 @@ public interface OrganizationDao {
     /**
      * Получить все объекты Organization подходящие по фильтру
      *
-     * @param organizationFilter
-     * @return
+     * @param organizationFilter фильтр по организации
+     * @return список организаций
      */
     List<Organization> list(OrganizationFilter organizationFilter);
 
     /**
      * Получить Organization по идентификатору
      *
-     * @param id
-     * @return
+     * @param id уникальный идентификатор организации
+     * @return организация
      */
     Organization loadById(int id);
 
     /**
      * Обновить Organization
      *
-     * @param organizationFilter
+     * @param organizationFilter фильтр по органзиции
      */
     void update(OrganizationFilter organizationFilter);
 
     /**
      * Сохранить Organization
      *
-     * @param organization
+     * @param organization организация
      */
     void save(Organization organization);
 }

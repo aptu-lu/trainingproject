@@ -14,29 +14,29 @@ public interface OfficeService {
     /**
      * Получить список офисов по фильтру
      *
-     * @param officeFilter
-     * @return
+     * @param officeFilter фильтр по офису
+     * @return список представлений офиса
      */
     List<ListOfficeView> getList(OfficeFilter officeFilter);
 
     /**
      * Получить офис по идентификатору
      *
-     * @param id
-     * @return
+     * @param id уникальный идентификатор офиса
+     * @return представление офиса
      */
     OfficeView get(int id);
 
     /**
      * Обновить офис
      *
-     * @param officeFilter
+     * @param officeFilter фильтр по офису
      */
     void update(OfficeFilter officeFilter);
 
     /**
      * Сохранить офис
-     * @param officeFilter
+     * @param officeFilter фильтр по офису
      */
     void add(OfficeFilter officeFilter);
 }

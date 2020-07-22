@@ -12,15 +12,15 @@ public interface CountriesDao {
     /**
      * Получить все объекты Countries
      *
-     * @return
+     * @return список стран
      */
     List<Countries> list();
 
     /**
      * Получить Countries по коду
      *
-     * @param code
-     * @return
+     * @param code код страны
+     * @return страна
      */
     Countries loadByCode(String code);
 }

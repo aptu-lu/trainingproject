@@ -13,30 +13,30 @@ public interface OfficeDao {
     /**
      * Получить все объекты Office подходящие по фильтру
      *
-     * @param officeFilter
-     * @return
+     * @param officeFilter фильтр по офису
+     * @return список офисов
      */
     List<Office> list(OfficeFilter officeFilter);
 
     /**
      * Получить Office по идентификатору
      *
-     * @param id
-     * @return
+     * @param id уникальный идентификатор офиса
+     * @return офис
      */
     Office loadById(int id);
 
     /**
      * Обновить Office
      *
-     * @param officeFilter
+     * @param officeFilter фильтр по офису
      */
     void update(OfficeFilter officeFilter);
 
     /**
      * Сохранить Office
      *
-     * @param office
+     * @param office офис
      */
     void save(Office office);
 }
