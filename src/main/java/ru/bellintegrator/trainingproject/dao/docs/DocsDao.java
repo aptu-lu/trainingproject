@@ -7,4 +7,6 @@ import java.util.List;
 public interface DocsDao {
 
     List<Docs> list();
+
+    Docs loadByName(String name);
 }

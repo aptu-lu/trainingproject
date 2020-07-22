@@ -24,4 +24,12 @@ public class DocsDaoImpl implements DocsDao {
         TypedQuery<Docs> query = entityManager.createQuery(LOAD_BY_ID, Docs.class);
         return query.getResultList();
     }
+
+    @Override
+    public Docs loadByName(String name) {
+        String LOAD_BY_NAME = "SELECT d FROM Docs d WHERE d.name = :name";
+        TypedQuery<Docs> query = entityManager.createQuery(LOAD_BY_NAME, Docs.class);
+        query.setParameter("name", name);
+        return query.getSingleResult();
+    }
 }

@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -54,22 +53,18 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
     @Override
     public void update(OrganizationFilter organizationFilter) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaUpdate<Organization> builderCriteriaUpdate = criteriaBuilder.createCriteriaUpdate(Organization.class);
-        Root<Organization> organizationRoot = builderCriteriaUpdate.from(Organization.class);
-        builderCriteriaUpdate.where(criteriaBuilder.equal(organizationRoot.get(Organization_.id), organizationFilter.getId()));
-        builderCriteriaUpdate.set(organizationRoot.get(Organization_.name), organizationFilter.getName())
-                .set(organizationRoot.get(Organization_.FULL_NAME), organizationFilter.getFullName())
-                .set(organizationRoot.get(Organization_.inn), organizationFilter.getInn())
-                .set(organizationRoot.get(Organization_.kpp), organizationFilter.getKpp())
-                .set(organizationRoot.get(Organization_.address), organizationFilter.getAddress());
+        Organization organization = loadById(organizationFilter.getId());
+        organization.setName(organizationFilter.getName());
+        organization.setFullName(organizationFilter.getFullName());
+        organization.setInn(organizationFilter.getInn());
+        organization.setKpp(organizationFilter.getKpp());
+        organization.setAddress(organizationFilter.getAddress());
         if (organizationFilter.getPhone() != null) {
-            builderCriteriaUpdate.set(organizationRoot.get(Organization_.phone), organizationFilter.getPhone());
+            organization.setPhone(organizationFilter.getPhone());
         }
-        if (organizationFilter.getActive() != null) {
-            builderCriteriaUpdate.set(organizationRoot.get(Organization_.isActive), organizationFilter.getActive());
+        if (organizationFilter.getActive()) {
+            organization.setActive(organizationFilter.getActive());
         }
-        entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
     }
 
     @Override

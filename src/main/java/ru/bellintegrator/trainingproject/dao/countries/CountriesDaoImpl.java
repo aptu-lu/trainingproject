@@ -24,4 +24,12 @@ public class CountriesDaoImpl implements CountriesDao{
         TypedQuery<Countries> query = entityManager.createQuery(LOAD_BY_ID, Countries.class);
         return query.getResultList();
     }
+
+    @Override
+    public Countries loadByCode(String code) {
+        String LOAD_BY_CODE = "SELECT c FROM Countries c WHERE c.code = :code";
+        TypedQuery<Countries> query = entityManager.createQuery(LOAD_BY_CODE, Countries.class);
+        query.setParameter("code", code);
+        return query.getSingleResult();
+    }
 }

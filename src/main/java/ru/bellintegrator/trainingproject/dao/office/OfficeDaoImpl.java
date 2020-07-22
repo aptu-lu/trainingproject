@@ -5,15 +5,12 @@ import org.springframework.stereotype.Repository;
 import ru.bellintegrator.trainingproject.filter.OfficeFilter;
 import ru.bellintegrator.trainingproject.model.Office;
 import ru.bellintegrator.trainingproject.model.Office_;
-import ru.bellintegrator.trainingproject.model.Organization;
 import ru.bellintegrator.trainingproject.model.Organization_;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -33,9 +30,9 @@ public class OfficeDaoImpl implements OfficeDao {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> builderQuery = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = builderQuery.from(Office.class);
-        Join<Office, Organization> join = officeRoot.join(Office_.organization);
         builderQuery.select(officeRoot);
-        Predicate criteria = criteriaBuilder.and((criteriaBuilder.equal(join.get(Organization_.id), officeFilter.getOrgId())));
+        Predicate criteria = criteriaBuilder.and((criteriaBuilder.equal(officeRoot.get(Office_.organization)
+                .get(Organization_.id), officeFilter.getOrgId())));
         if (officeFilter.getName() != null) {
             Predicate innPredicate = criteriaBuilder.and(criteriaBuilder.equal(officeRoot.get(Office_.name), officeFilter.getName()));
             criteria = criteriaBuilder.and(criteria, innPredicate);
@@ -62,20 +59,15 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public void update(OfficeFilter officeFilter) {
-        //todo bez criteria
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaUpdate<Office> builderCriteriaUpdate = criteriaBuilder.createCriteriaUpdate(Office.class);
-        Root<Office> officeRoot = builderCriteriaUpdate.from(Office.class);
-        builderCriteriaUpdate.where(criteriaBuilder.equal(officeRoot.get(Office_.id), officeFilter.getId()),
-                criteriaBuilder.equal(officeRoot.get(Office_.name), officeFilter.getName()),
-                criteriaBuilder.equal(officeRoot.get(Office_.address), officeFilter.getAddress()));
+        Office office = loadById(officeFilter.getId());
+        office.setName(officeFilter.getName());
+        office.setAddress(officeFilter.getAddress());
         if (officeFilter.getPhone() != null) {
-            builderCriteriaUpdate.set(officeRoot.get(Office_.phone), officeFilter.getPhone());
+            office.setPhone(officeFilter.getPhone());
         }
         if (officeFilter.getActive() != null) {
-            builderCriteriaUpdate.set(officeRoot.get(Office_.isActive), officeFilter.getActive());
+            office.setActive(officeFilter.getActive());
         }
-        entityManager.createQuery(builderCriteriaUpdate).executeUpdate();
     }
 
     @Override

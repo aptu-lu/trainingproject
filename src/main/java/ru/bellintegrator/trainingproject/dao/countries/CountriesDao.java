@@ -7,4 +7,6 @@ import java.util.List;
 public interface CountriesDao {
 
     List<Countries> list();
+
+    Countries loadByCode(String code);
 }
