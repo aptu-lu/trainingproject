@@ -1,4 +1,4 @@
-package ru.bellintegrator.trainingproject.controller;
+package ru.bellintegrator.trainingproject.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
