@@ -36,7 +36,7 @@ public interface OfficeDao {
     /**
      * Сохранить Office
      *
-     * @param office офис
+     * @param officeFilter офис по офису
      */
-    void save(Office office);
+    void save(OfficeFilter officeFilter);
 }

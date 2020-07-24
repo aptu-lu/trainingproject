@@ -2,9 +2,11 @@ package ru.bellintegrator.trainingproject.dao.office;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.bellintegrator.trainingproject.dao.organization.OrganizationDao;
 import ru.bellintegrator.trainingproject.filter.OfficeFilter;
 import ru.bellintegrator.trainingproject.model.Office;
 import ru.bellintegrator.trainingproject.model.Office_;
+import ru.bellintegrator.trainingproject.model.Organization;
 import ru.bellintegrator.trainingproject.model.Organization_;
 
 import javax.persistence.EntityManager;
@@ -22,10 +24,12 @@ import java.util.List;
 public class OfficeDaoImpl implements OfficeDao {
 
     private final EntityManager entityManager;
+    private final OrganizationDao organizationDao;
 
     @Autowired
-    public OfficeDaoImpl(EntityManager entityManager) {
+    public OfficeDaoImpl(EntityManager entityManager, OrganizationDao organizationDao) {
         this.entityManager = entityManager;
+        this.organizationDao = organizationDao;
     }
 
     /**
@@ -86,7 +90,22 @@ public class OfficeDaoImpl implements OfficeDao {
      * {@inheritDoc}
      */
     @Override
-    public void save(Office office) {
+    public void save(OfficeFilter officeFilter) {
+        Office office = new Office();
+        Organization organization = organizationDao.loadById(officeFilter.getOrgId());
+        office.setOrganization(organization);
+        if (officeFilter.getName() != null) {
+            office.setName(officeFilter.getName());
+        }
+        if (officeFilter.getAddress() != null) {
+            office.setAddress(officeFilter.getAddress());
+        }
+        if (officeFilter.getPhone() != null) {
+            office.setPhone(officeFilter.getPhone());
+        }
+        if (officeFilter.getActive() != null) {
+            office.setActive(officeFilter.getActive());
+        }
         entityManager.persist(office);
     }
 }

@@ -23,4 +23,12 @@ public interface DocsDao {
      * @return документ
      */
     Docs loadByName(String name);
+
+    /**
+     * Получить Docs по коду
+     *
+     * @param code код документа
+     * @return документ
+     */
+    Docs loadByCode(String code);
 }

@@ -41,4 +41,12 @@ public class DocsDaoImpl implements DocsDao {
         query.setParameter("name", name);
         return query.getSingleResult();
     }
+
+    @Override
+    public Docs loadByCode(String code) {
+        String LOAD_BY_CODE = "SELECT d FROM Docs d WHERE d.code = :code";
+        TypedQuery<Docs> query = entityManager.createQuery(LOAD_BY_CODE, Docs.class);
+        query.setParameter("code", code);
+        return query.getSingleResult();
+    }
 }

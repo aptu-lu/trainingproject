@@ -67,7 +67,6 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void add(OfficeFilter officeFilter) {
-        Office office = mapperFacade.map(officeFilter, Office.class);
-        officeDao.save(office);
+        officeDao.save(officeFilter);
     }
 }

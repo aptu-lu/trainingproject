@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void add(UserFilter userFilter) {
-        User user = mapperFacade.map(userFilter, User.class);
-        userDao.save(user);
+        userDao.save(userFilter);
     }
 }

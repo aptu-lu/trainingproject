@@ -36,7 +36,7 @@ public interface UserDao {
     /**
      * Сохранить User
      *
-     * @param user пользователь
+     * @param userFilter пользователь по фильтру
      */
-    void save(User user);
+    void save(UserFilter userFilter);
 }

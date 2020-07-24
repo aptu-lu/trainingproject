@@ -6,7 +6,16 @@ import ru.bellintegrator.trainingproject.dao.countries.CountriesDao;
 import ru.bellintegrator.trainingproject.dao.docs.DocsDao;
 import ru.bellintegrator.trainingproject.dao.office.OfficeDao;
 import ru.bellintegrator.trainingproject.filter.UserFilter;
-import ru.bellintegrator.trainingproject.model.*;
+import ru.bellintegrator.trainingproject.model.Countries;
+import ru.bellintegrator.trainingproject.model.Countries_;
+import ru.bellintegrator.trainingproject.model.Docs;
+import ru.bellintegrator.trainingproject.model.Docs_;
+import ru.bellintegrator.trainingproject.model.Office;
+import ru.bellintegrator.trainingproject.model.Office_;
+import ru.bellintegrator.trainingproject.model.User;
+import ru.bellintegrator.trainingproject.model.UserDoc;
+import ru.bellintegrator.trainingproject.model.UserDoc_;
+import ru.bellintegrator.trainingproject.model.User_;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -134,7 +143,47 @@ public class UserDaoImpl implements UserDao {
      * {@inheritDoc}
      */
     @Override
-    public void save(User user) {
+    public void save(UserFilter userFilter) {
+        User user = new User();
+        Office office = officeDao.loadById(userFilter.getOfficeId());
+        user.setOffice(office);
+        user.setFirstName(userFilter.getFirstName());
+        user.setPosition(userFilter.getPosition());
+        if (userFilter.getLastName() != null) {
+            user.setLastName(userFilter.getLastName());
+        }
+        if (userFilter.getMiddleName() != null) {
+            user.setMiddleName(userFilter.getMiddleName());
+        }
+        if (userFilter.getPhone() != null) {
+            user.setPhone(userFilter.getPhone());
+        }
+        if (userFilter.getIdentified() != null) {
+            user.setIdentified(userFilter.getIdentified());
+        }
+        if (userFilter.getDocCode() != null || userFilter.getDocName() != null
+                || userFilter.getDocNumber() != null || userFilter.getDocDate() != null) {
+            UserDoc userDoc = new UserDoc();
+            if (userFilter.getDocCode() != null) {
+                Docs docs = docsDao.loadByCode(userFilter.getDocCode());
+                userDoc.setDocs(docs);
+            }
+            if (userFilter.getDocName() != null) {
+                Docs docs = docsDao.loadByName(userFilter.getDocName());
+                userDoc.setDocs(docs);
+            }
+            if (userFilter.getDocNumber() != null) {
+                userDoc.setDocNumber(userFilter.getDocNumber());
+            }
+            if (userFilter.getDocDate() != null) {
+                userDoc.setDocDate(userFilter.getDocDate());
+            }
+            user.setUserDoc(userDoc);
+        }
+        if (userFilter.getCitizenshipCode() != null) {
+            Countries countries = countriesDao.loadByCode(userFilter.getCitizenshipCode());
+            user.setCountries(countries);
+        }
         entityManager.persist(user);
     }
 }

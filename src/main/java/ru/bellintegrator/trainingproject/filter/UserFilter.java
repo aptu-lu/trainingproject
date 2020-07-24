@@ -59,6 +59,12 @@ public class UserFilter {
     private String position;
 
     /**
+     * Код документа
+     */
+    @Pattern(regexp = "^[0-9]+$", groups = {MarkerValidate.Update.class, MarkerValidate.Save.class})
+    private String docCode;
+
+    /**
      * Название документа
      */
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Save.class})
@@ -181,5 +187,13 @@ public class UserFilter {
 
     public void setIdentified(Boolean identified) {
         isIdentified = identified;
+    }
+
+    public String getDocCode() {
+        return docCode;
+    }
+
+    public void setDocCode(String docCode) {
+        this.docCode = docCode;
     }
 }
