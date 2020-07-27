@@ -44,6 +44,7 @@ public class OfficeController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void save(@RequestBody @Validated({MarkerValidate.Save.class}) OfficeFilter officeFilter) {
+        System.out.println(officeFilter.getActive());
         officeService.add(officeFilter);
     }
 }

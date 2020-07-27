@@ -1,5 +1,7 @@
 package ru.bellintegrator.trainingproject.filter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -91,6 +93,7 @@ public class UserFilter {
     /**
      * Идентифицирован ли
      */
+    @JsonProperty("isIdentified")
     private Boolean isIdentified;
 
     public Integer getId() {

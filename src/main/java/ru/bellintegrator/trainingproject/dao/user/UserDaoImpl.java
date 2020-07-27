@@ -90,9 +90,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User loadById(int id) {
         String LOAD_BY_ID = "SELECT u FROM User u LEFT JOIN FETCH u.office " +
-                "LEFT JOIN FETCH u.userDoc ud" +
-                "LEFT JOIN FETCH ud.docs" +
-                "LEFT JOIN FETCH u.countries" +
+                "LEFT JOIN FETCH u.userDoc ud " +
+                "LEFT JOIN FETCH ud.docs " +
+                "LEFT JOIN FETCH u.countries " +
                 "WHERE u.id = :id";
         TypedQuery<User> query = entityManager.createQuery(LOAD_BY_ID, User.class);
         query.setParameter("id", id);

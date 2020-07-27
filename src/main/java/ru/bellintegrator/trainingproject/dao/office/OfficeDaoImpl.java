@@ -1,5 +1,6 @@
 package ru.bellintegrator.trainingproject.dao.office;
 
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.trainingproject.dao.organization.OrganizationDao;
@@ -25,11 +26,13 @@ public class OfficeDaoImpl implements OfficeDao {
 
     private final EntityManager entityManager;
     private final OrganizationDao organizationDao;
+    private final MapperFacade mapperFacade;
 
     @Autowired
-    public OfficeDaoImpl(EntityManager entityManager, OrganizationDao organizationDao) {
+    public OfficeDaoImpl(EntityManager entityManager, OrganizationDao organizationDao, MapperFacade mapperFacade) {
         this.entityManager = entityManager;
         this.organizationDao = organizationDao;
+        this.mapperFacade = mapperFacade;
     }
 
     /**
@@ -91,21 +94,9 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public void save(OfficeFilter officeFilter) {
-        Office office = new Office();
+        Office office = mapperFacade.map(officeFilter, Office.class);
         Organization organization = organizationDao.loadById(officeFilter.getOrgId());
         office.setOrganization(organization);
-        if (officeFilter.getName() != null) {
-            office.setName(officeFilter.getName());
-        }
-        if (officeFilter.getAddress() != null) {
-            office.setAddress(officeFilter.getAddress());
-        }
-        if (officeFilter.getPhone() != null) {
-            office.setPhone(officeFilter.getPhone());
-        }
-        if (officeFilter.getActive() != null) {
-            office.setActive(officeFilter.getActive());
-        }
         entityManager.persist(office);
     }
 }

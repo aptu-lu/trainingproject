@@ -1,5 +1,7 @@
 package ru.bellintegrator.trainingproject.filter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -47,6 +49,7 @@ public class OfficeFilter {
     /**
      * Действителен ли
      */
+    @JsonProperty("isActive")
     private Boolean isActive;
 
     public Integer getId() {

@@ -8,5 +8,5 @@ public class SuccessResult {
     /**
      * Успешный результат
      */
-    public static final String RESULT = "success";
+    public final String RESULT = "success";
 }

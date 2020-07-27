@@ -45,7 +45,7 @@ public class UserDoc {
     private String docNumber;
 
     @MapsId
-    @OneToOne(mappedBy = "userDoc", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
