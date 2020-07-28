@@ -11,10 +11,16 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Обрабатывает запросы по заданному URI {@value /api/countries}
+ */
 @RestController
 @RequestMapping(value = "/api/countries", produces = APPLICATION_JSON_VALUE)
 public class CountriesController {
 
+    /**
+     * Сервис
+     */
     private final CountriesService countriesService;
 
     @Autowired
@@ -22,6 +28,11 @@ public class CountriesController {
         this.countriesService = countriesService;
     }
 
+    /**
+     * Возвращает список всех стран
+     *
+     * @return {@link ListCountriesView} представление списка стран
+     */
     @GetMapping
     public List<ListCountriesView> list() {
         return countriesService.list();

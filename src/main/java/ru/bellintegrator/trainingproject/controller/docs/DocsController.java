@@ -11,10 +11,16 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Обрабатывает запросы по заданному URI {@value /api/docs}
+ */
 @RestController
 @RequestMapping(value = "/api/docs", produces = APPLICATION_JSON_VALUE)
 public class DocsController {
 
+    /**
+     * Сервис
+     */
     private final DocsService docsService;
 
     @Autowired
@@ -22,6 +28,11 @@ public class DocsController {
         this.docsService = docsService;
     }
 
+    /**
+     * Возвращает список всех документов
+     *
+     * @return {@link ListDocsView} представление списка документов
+     */
     @GetMapping
     public List<ListDocsView> list() {
         return docsService.list();

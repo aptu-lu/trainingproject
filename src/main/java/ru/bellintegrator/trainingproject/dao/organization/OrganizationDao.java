@@ -36,7 +36,7 @@ public interface OrganizationDao {
     /**
      * Сохранить Organization
      *
-     * @param organization организация
+     * @param organizationFilter фильтр по организации
      */
-    void save(Organization organization);
+    void save(OrganizationFilter organizationFilter);
 }

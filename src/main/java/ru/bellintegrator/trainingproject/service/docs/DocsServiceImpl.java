@@ -33,9 +33,8 @@ public class DocsServiceImpl implements DocsService {
     @Transactional
     public List<ListDocsView> list() {
         List<Docs> list = docsDao.list();
-        List<ListDocsView> listDocsViews = list.stream()
+        return list.stream()
                 .map((docs -> mapperFacade.map(docs, ListDocsView.class)))
                 .collect(Collectors.toList());
-        return listDocsViews;
     }
 }

@@ -17,10 +17,16 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Обрабатывает запросы по заданному URI {@value /api/organization}
+ */
 @RestController
 @RequestMapping(value = "/api/organization/", produces = APPLICATION_JSON_VALUE)
 public class OrganizationController {
 
+    /**
+     * Сервис
+     */
     private final OrganizationService organizationService;
 
     @Autowired
@@ -28,21 +34,43 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
+    /**
+     * Возвращает список представлений организаций по заданному фильтру
+     *
+     * @param organizationFilter фильтр по организации
+     * @return список представлений организации
+     */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public List<ListOrganizationView> list(@RequestBody @Validated(MarkerValidate.List.class) OrganizationFilter organizationFilter) {
         return organizationService.getList(organizationFilter);
     }
 
+    /**
+     * Возвращает представление организации по заданному фильтру
+     *
+     * @param id идентификатор организации
+     * @return представление организации
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public OrganizationView getOrganization(@PathVariable int id) {
         return organizationService.get(id);
     }
 
+    /**
+     * Обновляет организацию по фильтру
+     *
+     * @param organizationFilter фильтр по организации
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@RequestBody @Validated(MarkerValidate.Update.class) OrganizationFilter organizationFilter) {
         organizationService.update(organizationFilter);
     }
 
+    /**
+     * Сохраняет организацию по фильтру
+     *
+     * @param organizationFilter фильтр по организации
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void save(@RequestBody @Validated(MarkerValidate.Save.class) OrganizationFilter organizationFilter) {
         organizationService.add(organizationFilter);

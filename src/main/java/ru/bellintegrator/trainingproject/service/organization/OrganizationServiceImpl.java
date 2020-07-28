@@ -35,10 +35,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public List<ListOrganizationView> getList(OrganizationFilter organizationFilter) {
         List<Organization> list = organizationDao.list(organizationFilter);
-        List<ListOrganizationView> listOrganizationViews = list.stream()
+        return list.stream()
                 .map((organization -> mapperFacade.map(organization, ListOrganizationView.class)))
                 .collect(Collectors.toList());
-        return listOrganizationViews;
     }
 
     /**
@@ -48,8 +47,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public OrganizationView get(int id) {
         Organization organization = organizationDao.loadById(id);
-        OrganizationView organizationView = mapperFacade.map(organization, OrganizationView.class);
-        return organizationView;
+        return mapperFacade.map(organization, OrganizationView.class);
     }
 
     /**
@@ -67,7 +65,6 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public void add(OrganizationFilter organizationFilter) {
-        Organization organization = mapperFacade.map(organizationFilter, Organization.class);
-        organizationDao.save(organization);
+        organizationDao.save(organizationFilter);
     }
 }

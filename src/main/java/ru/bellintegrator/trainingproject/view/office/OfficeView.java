@@ -1,5 +1,7 @@
 package ru.bellintegrator.trainingproject.view.office;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Представление офиса
  */
@@ -28,6 +30,7 @@ public class OfficeView {
     /**
      * Действителен ли
      */
+    @JsonProperty("isActive")
     private Boolean isActive;
 
     public int getId() {

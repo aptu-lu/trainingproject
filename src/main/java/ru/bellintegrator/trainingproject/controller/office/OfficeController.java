@@ -17,9 +17,16 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Обрабатывает запросы по заданному URI {@value /api/office}
+ */
 @RestController
 @RequestMapping(value = "/api/office/", produces = APPLICATION_JSON_VALUE)
 public class OfficeController {
+
+    /**
+     * Сервис
+     */
     private final OfficeService officeService;
 
     @Autowired
@@ -27,24 +34,45 @@ public class OfficeController {
         this.officeService = officeService;
     }
 
+    /**
+     * Возвращает список представлений офисов по заданному фильтру
+     *
+     * @param officeFilter фильтр по офису
+     * @return список представлений офисов
+     */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public List<ListOfficeView> list(@RequestBody @Validated(MarkerValidate.List.class) OfficeFilter officeFilter) {
         return officeService.getList(officeFilter);
     }
 
+    /**
+     * Возвращает представление офиса по заданному идентификатору
+     *
+     * @param id идентификатор офиса
+     * @return представление офиса
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public OfficeView getOffice(@PathVariable int id) {
         return officeService.get(id);
     }
 
+    /**
+     * Обновляет офис по заданному фильтру
+     *
+     * @param officeFilter фильтр по офису
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@RequestBody @Validated(MarkerValidate.Update.class) OfficeFilter officeFilter) {
         officeService.update(officeFilter);
     }
 
+    /**
+     * Сохраняет офис по заданному фильтру
+     *
+     * @param officeFilter фильтр по офису
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void save(@RequestBody @Validated({MarkerValidate.Save.class}) OfficeFilter officeFilter) {
-        System.out.println(officeFilter.getActive());
         officeService.add(officeFilter);
     }
 }

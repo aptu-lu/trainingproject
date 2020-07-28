@@ -53,6 +53,45 @@ public class UserDaoImpl implements UserDao {
         CriteriaQuery<User> builderQuery = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = builderQuery.from(User.class);
         builderQuery.select(userRoot);
+        Predicate criteria = getPredicate(userFilter, criteriaBuilder, userRoot);
+        builderQuery.where(criteria);
+        return entityManager.createQuery(builderQuery).getResultList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public User loadById(int id) {
+        String LOAD_BY_ID = "SELECT u FROM User u LEFT JOIN FETCH u.office " +
+                "LEFT JOIN FETCH u.userDoc ud " +
+                "LEFT JOIN FETCH ud.docs " +
+                "LEFT JOIN FETCH u.countries " +
+                "WHERE u.id = :id";
+        TypedQuery<User> query = entityManager.createQuery(LOAD_BY_ID, User.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update(UserFilter userFilter) {
+        User user = loadById(userFilter.getId());
+        updateFields(user, userFilter);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void save(UserFilter userFilter) {
+        User user = createUser(userFilter);
+        entityManager.persist(user);
+    }
+
+    private Predicate getPredicate(UserFilter userFilter, CriteriaBuilder criteriaBuilder, Root<User> userRoot) {
         Predicate criteria = criteriaBuilder.and(criteriaBuilder.equal(userRoot.get(User_.office).get(Office_.id), userFilter.getOfficeId()));
         if (userFilter.getFirstName() != null) {
             Predicate innPredicate = criteriaBuilder.and(criteriaBuilder.equal(userRoot.get(User_.firstName), userFilter.getFirstName()));
@@ -80,31 +119,10 @@ public class UserDaoImpl implements UserDao {
                     .get(Countries_.code), userFilter.getCitizenshipCode()));
             criteria = criteriaBuilder.and(criteria, innPredicate);
         }
-        builderQuery.where(criteria);
-        return entityManager.createQuery(builderQuery).getResultList();
+        return criteria;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public User loadById(int id) {
-        String LOAD_BY_ID = "SELECT u FROM User u LEFT JOIN FETCH u.office " +
-                "LEFT JOIN FETCH u.userDoc ud " +
-                "LEFT JOIN FETCH ud.docs " +
-                "LEFT JOIN FETCH u.countries " +
-                "WHERE u.id = :id";
-        TypedQuery<User> query = entityManager.createQuery(LOAD_BY_ID, User.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(UserFilter userFilter) {
-        User user = loadById(userFilter.getId());
+    private void updateFields(User user, UserFilter userFilter) {
         user.setFirstName(userFilter.getFirstName());
         user.setPosition(userFilter.getPosition());
         if (userFilter.getOfficeId() != null) {
@@ -117,6 +135,7 @@ public class UserDaoImpl implements UserDao {
         if (userFilter.getMiddleName() != null) {
             user.setMiddleName(userFilter.getMiddleName());
         }
+
         if (userFilter.getPhone() != null) {
             user.setPhone(userFilter.getPhone());
         }
@@ -139,11 +158,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void save(UserFilter userFilter) {
+    private User createUser(UserFilter userFilter) {
         User user = new User();
         Office office = officeDao.loadById(userFilter.getOfficeId());
         user.setOffice(office);
@@ -184,6 +199,6 @@ public class UserDaoImpl implements UserDao {
             Countries countries = countriesDao.loadByCode(userFilter.getCitizenshipCode());
             user.setCountries(countries);
         }
-        entityManager.persist(user);
+        return user;
     }
 }

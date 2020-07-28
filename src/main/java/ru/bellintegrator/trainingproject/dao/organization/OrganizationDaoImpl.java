@@ -1,5 +1,6 @@
 package ru.bellintegrator.trainingproject.dao.organization;
 
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.trainingproject.filter.OrganizationFilter;
@@ -21,10 +22,12 @@ import java.util.List;
 public class OrganizationDaoImpl implements OrganizationDao {
 
     private final EntityManager entityManager;
+    private final MapperFacade mapperFacade;
 
     @Autowired
-    public OrganizationDaoImpl(EntityManager entityManager) {
+    public OrganizationDaoImpl(EntityManager entityManager, MapperFacade mapperFacade) {
         this.entityManager = entityManager;
+        this.mapperFacade = mapperFacade;
     }
 
     /**
@@ -36,15 +39,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         CriteriaQuery<Organization> builderQuery = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = builderQuery.from(Organization.class);
         builderQuery.select(organizationRoot);
-        Predicate criteria = criteriaBuilder.and((criteriaBuilder.equal(organizationRoot.get(Organization_.name), organizationFilter.getName())));
-        if (organizationFilter.getInn() != null) {
-            Predicate innPredicate = criteriaBuilder.and(criteriaBuilder.equal(organizationRoot.get(Organization_.inn), organizationFilter.getInn()));
-            criteria = criteriaBuilder.and(criteria, innPredicate);
-        }
-        if (organizationFilter.getActive() != null) {
-            Predicate isActivePredicate = criteriaBuilder.and(criteriaBuilder.equal(organizationRoot.get(Organization_.isActive), organizationFilter.getActive()));
-            criteria = criteriaBuilder.and(criteria, isActivePredicate);
-        }
+        Predicate criteria = getPredicate(organizationFilter, criteriaBuilder, organizationRoot);
         builderQuery.where(criteria);
         return entityManager.createQuery(builderQuery).getResultList();
     }
@@ -66,6 +61,32 @@ public class OrganizationDaoImpl implements OrganizationDao {
     @Override
     public void update(OrganizationFilter organizationFilter) {
         Organization organization = loadById(organizationFilter.getId());
+        updateFields(organization, organizationFilter);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void save(OrganizationFilter organizationFilter) {
+        Organization organization = mapperFacade.map(organizationFilter, Organization.class);
+        entityManager.persist(organization);
+    }
+
+    private Predicate getPredicate(OrganizationFilter organizationFilter, CriteriaBuilder criteriaBuilder, Root<Organization> organizationRoot) {
+        Predicate criteria = criteriaBuilder.and((criteriaBuilder.equal(organizationRoot.get(Organization_.name), organizationFilter.getName())));
+        if (organizationFilter.getInn() != null) {
+            Predicate innPredicate = criteriaBuilder.and(criteriaBuilder.equal(organizationRoot.get(Organization_.inn), organizationFilter.getInn()));
+            criteria = criteriaBuilder.and(criteria, innPredicate);
+        }
+        if (organizationFilter.getActive() != null) {
+            Predicate isActivePredicate = criteriaBuilder.and(criteriaBuilder.equal(organizationRoot.get(Organization_.isActive), organizationFilter.getActive()));
+            criteria = criteriaBuilder.and(criteria, isActivePredicate);
+        }
+        return criteria;
+    }
+
+    private void updateFields(Organization organization, OrganizationFilter organizationFilter) {
         organization.setName(organizationFilter.getName());
         organization.setFullName(organizationFilter.getFullName());
         organization.setInn(organizationFilter.getInn());
@@ -77,13 +98,5 @@ public class OrganizationDaoImpl implements OrganizationDao {
         if (organizationFilter.getActive()) {
             organization.setActive(organizationFilter.getActive());
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void save(Organization organization) {
-        entityManager.persist(organization);
     }
 }

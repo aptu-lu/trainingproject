@@ -1,5 +1,7 @@
 package ru.bellintegrator.trainingproject.view.organization;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Представление организации
  */
@@ -43,6 +45,7 @@ public class OrganizationView {
     /**
      * Действителен ли
      */
+    @JsonProperty("isActive")
     private Boolean isActive;
 
     public int getId() {

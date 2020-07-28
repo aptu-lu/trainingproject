@@ -44,20 +44,7 @@ public class OfficeDaoImpl implements OfficeDao {
         CriteriaQuery<Office> builderQuery = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = builderQuery.from(Office.class);
         builderQuery.select(officeRoot);
-        Predicate criteria = criteriaBuilder.and((criteriaBuilder.equal(officeRoot.get(Office_.organization)
-                .get(Organization_.id), officeFilter.getOrgId())));
-        if (officeFilter.getName() != null) {
-            Predicate innPredicate = criteriaBuilder.and(criteriaBuilder.equal(officeRoot.get(Office_.name), officeFilter.getName()));
-            criteria = criteriaBuilder.and(criteria, innPredicate);
-        }
-        if (officeFilter.getPhone() != null) {
-            Predicate isActivePredicate = criteriaBuilder.and(criteriaBuilder.equal(officeRoot.get(Office_.phone), officeFilter.getPhone()));
-            criteria = criteriaBuilder.and(criteria, isActivePredicate);
-        }
-        if (officeFilter.getActive() != null) {
-            Predicate isActivePredicate = criteriaBuilder.and(criteriaBuilder.equal(officeRoot.get(Office_.isActive), officeFilter.getActive()));
-            criteria = criteriaBuilder.and(criteria, isActivePredicate);
-        }
+        Predicate criteria = getPredicate(officeFilter, criteriaBuilder,officeRoot);
         builderQuery.where(criteria);
         return entityManager.createQuery(builderQuery).getResultList();
     }
@@ -79,14 +66,7 @@ public class OfficeDaoImpl implements OfficeDao {
     @Override
     public void update(OfficeFilter officeFilter) {
         Office office = loadById(officeFilter.getId());
-        office.setName(officeFilter.getName());
-        office.setAddress(officeFilter.getAddress());
-        if (officeFilter.getPhone() != null) {
-            office.setPhone(officeFilter.getPhone());
-        }
-        if (officeFilter.getActive() != null) {
-            office.setActive(officeFilter.getActive());
-        }
+        updateFields(office, officeFilter);
     }
 
     /**
@@ -98,5 +78,34 @@ public class OfficeDaoImpl implements OfficeDao {
         Organization organization = organizationDao.loadById(officeFilter.getOrgId());
         office.setOrganization(organization);
         entityManager.persist(office);
+    }
+
+    private Predicate getPredicate(OfficeFilter officeFilter, CriteriaBuilder criteriaBuilder, Root<Office> officeRoot) {
+        Predicate criteria = criteriaBuilder.and((criteriaBuilder.equal(officeRoot.get(Office_.organization)
+                .get(Organization_.id), officeFilter.getOrgId())));
+        if (officeFilter.getName() != null) {
+            Predicate innPredicate = criteriaBuilder.and(criteriaBuilder.equal(officeRoot.get(Office_.name), officeFilter.getName()));
+            criteria = criteriaBuilder.and(criteria, innPredicate);
+        }
+        if (officeFilter.getPhone() != null) {
+            Predicate isActivePredicate = criteriaBuilder.and(criteriaBuilder.equal(officeRoot.get(Office_.phone), officeFilter.getPhone()));
+            criteria = criteriaBuilder.and(criteria, isActivePredicate);
+        }
+        if (officeFilter.getActive() != null) {
+            Predicate isActivePredicate = criteriaBuilder.and(criteriaBuilder.equal(officeRoot.get(Office_.isActive), officeFilter.getActive()));
+            criteria = criteriaBuilder.and(criteria, isActivePredicate);
+        }
+        return criteria;
+    }
+
+    private void updateFields(Office office, OfficeFilter officeFilter) {
+        office.setName(officeFilter.getName());
+        office.setAddress(officeFilter.getAddress());
+        if (officeFilter.getPhone() != null) {
+            office.setPhone(officeFilter.getPhone());
+        }
+        if (officeFilter.getActive() != null) {
+            office.setActive(officeFilter.getActive());
+        }
     }
 }

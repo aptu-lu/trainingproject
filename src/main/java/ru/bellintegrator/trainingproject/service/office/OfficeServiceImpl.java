@@ -35,10 +35,9 @@ public class OfficeServiceImpl implements OfficeService {
     @Transactional
     public List<ListOfficeView> getList(OfficeFilter officeFilter) {
         List<Office> list = officeDao.list(officeFilter);
-        List<ListOfficeView> listOfficeViews = list.stream()
+        return list.stream()
                 .map((office -> mapperFacade.map(office, ListOfficeView.class)))
                 .collect(Collectors.toList());
-        return listOfficeViews;
     }
 
     /**
@@ -48,8 +47,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Transactional
     public OfficeView get(int id) {
         Office office = officeDao.loadById(id);
-        OfficeView officeView = mapperFacade.map(office, OfficeView.class);
-        return officeView;
+        return mapperFacade.map(office, OfficeView.class);
     }
 
     /**

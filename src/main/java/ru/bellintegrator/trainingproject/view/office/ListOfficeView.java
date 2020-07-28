@@ -1,5 +1,7 @@
 package ru.bellintegrator.trainingproject.view.office;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Представление списка офисов
  */
@@ -18,6 +20,7 @@ public class ListOfficeView {
     /**
      * Действителен ли
      */
+    @JsonProperty("isActive")
     private Boolean isActive;
 
     public int getId() {

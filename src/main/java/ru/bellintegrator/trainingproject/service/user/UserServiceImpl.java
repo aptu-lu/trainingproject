@@ -35,10 +35,9 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public List<ListUserView> getList(UserFilter userFilter) {
         List<User> list = userDao.list(userFilter);
-        List<ListUserView> listUserViews = list.stream()
+        return list.stream()
                 .map((user -> mapperFacade.map(user, ListUserView.class)))
                 .collect(Collectors.toList());
-        return listUserViews;
     }
 
     /**
@@ -48,8 +47,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public UserView get(int id) {
         User user = userDao.loadById(id);
-        UserView userView = mapperFacade.map(user, UserView.class);
-        return userView;
+        return mapperFacade.map(user, UserView.class);
     }
 
     /**

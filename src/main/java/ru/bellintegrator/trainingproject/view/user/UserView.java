@@ -1,5 +1,7 @@
 package ru.bellintegrator.trainingproject.view.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 /**
@@ -65,6 +67,7 @@ public class UserView {
     /**
      * Идентифицирован ли
      */
+    @JsonProperty("isIdentified")
     private Boolean isIdentified;
 
     public int getId() {

@@ -1,5 +1,7 @@
 package ru.bellintegrator.trainingproject.view.organization;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Представление списка организации
  */
@@ -18,6 +20,7 @@ public class ListOrganizationView {
     /**
      * Действителен ли
      */
+    @JsonProperty("isActive")
     private Boolean isActive;
 
     public int getId() {

@@ -33,9 +33,8 @@ public class CountriesServiceImpl implements CountriesService {
     @Transactional
     public List<ListCountriesView> list() {
         List<Countries> list = countriesDao.list();
-        List<ListCountriesView> listDocsViews = list.stream()
+        return list.stream()
                 .map((countries -> mapperFacade.map(countries, ListCountriesView.class)))
                 .collect(Collectors.toList());
-        return listDocsViews;
     }
 }

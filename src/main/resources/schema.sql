@@ -55,7 +55,7 @@ COMMENT ON TABLE Docs IS 'Справочник документов';
 
 CREATE TABLE IF NOT EXISTS Countries (
     id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
+    version    INTEGER  DEFAULT 1   COMMENT 'Служебное поле hibernate',
     code       VARCHAR(50) NOT NULL COMMENT 'Код',
     name       VARCHAR(50) NOT NULL COMMENT 'Название страны'
 );
