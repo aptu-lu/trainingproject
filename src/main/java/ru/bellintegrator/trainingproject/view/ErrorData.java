@@ -10,6 +10,9 @@ public class ErrorData {
      */
     private String error;
 
+    /**
+     * Код ошибки
+     */
     private String codeError;
 
     public ErrorData(String error) {
