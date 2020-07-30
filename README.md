@@ -1,42 +1,103 @@
 # **Документация для пользователя**
-## 1. ???
-Приложение размещено на 8888 порту. В POST запросах ожидает JSON строку с фильтром по сущности, которое будет провалидированно.
-Возможные поля фильтров сущностей (поля выделенные жирным являются обязательными):
+## 1. Запрос
+Rest сервис размещен на 8888 порту, принимает http запросы(методы GET, POST). В POST запросах ожидает JSON строку с фильтром по сущности, которое будет провалидированно.
+В данной таблице представлено : маршрут (конечная точка), метод (http запроса), поля фильтров (поле, выделенное жирным, является обязательным), описание:
   * Документы
 
     | Маршрут | Метод | Поля фильтров | Описание |
     | -------------- | :-------: |--------------- | --------------- |
-    | api/docs | GET |  **id** | Получить список всех документов |
+    | api/docs | GET |  - | Получить список всех документов |
     
   * Страны
     
     | Маршрут | Метод | Поля фильтров | Описание |
     | -------------- | :-------: |--------------- | --------------- |
-    | api/countries | GET |  **id** | Получить список всех стран |
+    | api/countries | GET |  - | Получить список всех стран |
     
  * Офис
  
-     | Маршрут |  Метод | Поля фильтров | Описание |
-     | -------------- | :-------: | --------------- | --------------- |
-     | api/office/list  | POST | **orgId**, name, phone, isActive | Получить список офисов по заданному фильтру в теле запроса |
-     | api/office/{id}  | GET  | **id** | Получить офис по заданному идентификатору |
-     | api/office/update | POST | **id**, **name**, **address**, phone, isActive | Обновить офис по заданному фильтру в теле запроса |
-     | api/office/save  | POST | **orgId**, name, address, phone, isActive | Сохранить офис по заданному фильтру в теле запроса |
+    | Маршрут |  Метод | Поля фильтров | Описание |
+    | -------------- | :-------: | --------------- | --------------- |
+    | api/office/list  | POST | **orgId**, name, phone, isActive | Получить список офисов по заданному фильтру в теле запроса |
+    | api/office/{**id**}  | GET  | - | Получить офис по заданному идентификатору |
+    | api/office/update | POST | **id**, **name**, **address**, phone, isActive | Обновить офис по заданному фильтру в теле запроса |
+    | api/office/save  | POST | **orgId**, name, address, phone, isActive | Сохранить офис по заданному фильтру в теле запроса |
      
-   * Организация
+ * Организация
      
-     | Маршрут |  Метод | Поля фильтров | Описание |
-     | -------------- | :-------: | --------------- | --------------- |
-     | api/organization/list  | POST | **name**, inn, isActive | Получить список организаций по заданному фильтру в теле запроса |
-     | api/organization/{id}  | GET  | **id** | Получить организацию по заданному идентификатору |
-     | api/organization/update | POST | **id**, **name**, **fullName**, **inn**, **kpp**, **address**, phone, isActive | Обновить организацию по заданному фильтру в теле запроса |
-     | api/organization/save  | POST | **name**, **fullName**, **inn**, **kpp**, **address**, phone, isActive | Сохранить организацию по заданному фильтру в теле запроса |
+    | Маршрут |  Метод | Поля фильтров | Описание |
+    | -------------- | :-------: | --------------- | --------------- | 
+    | api/organization/list  | POST | **name**, inn, isActive | Получить список организаций по заданному фильтру в теле запроса |
+    | api/organization/{**id**}  | GET  | - | Получить организацию по заданному идентификатору | 
+    | api/organization/update | POST | **id**, **name**, **fullName**, **inn**, **kpp**, **address**, phone, isActive | Обновить организацию по заданному фильтру в теле запроса |
+    | api/organization/save  | POST | **name**, **fullName**, **inn**, **kpp**, **address**, phone, isActive | Сохранить организацию по заданному фильтру в теле запроса |
      
-   * Пользователь
+ * Пользователь
      
-     | Маршрут |  Метод | Поля фильтров | Описание |
-     | -------------- | :-------: | -------------- | --------------- |
-     | api/user/list  | POST | **officeId**, firstName, lastName, middleName, position, docCode, citizenshipCode | Получить список пользователей по заданному фильтру в теле запроса |
-     | api/user/{id}  | GET  | **id** | Получить пользователя по заданному идентификатору |
-     | api/user/update | POST | **Id**, **firstName**, lastName, middleName, **position**, phone, docName, docNumber, docDate, citizenshipCode , isIdentified | Обновить пользователя по заданному фильтру в теле запроса |
-     | api/user/save  | POST | **officeId**, **firstName**, lastName, middleName, **position**, phone, docCode, docName, docNumber, docDate, citizenshipCode , isIdentified  | Сохранить пользователя по заданному фильтру в теле запроса |
+    | Маршрут |  Метод | Поля фильтров | Описание |
+    | -------------- | :-------: | -------------- | --------------- |
+    | api/user/list  | POST | **officeId**, firstName, lastName, middleName, position, docCode, citizenshipCode | Получить список пользователей по заданному фильтру в теле запроса |
+    | api/user/{**id**}  | GET  | - | Получить пользователя по заданному идентификатору |
+    | api/user/update | POST | **Id**, **firstName**, lastName, middleName, **position**, phone, docName, docNumber, docDate, citizenshipCode , isIdentified | Обновить пользователя по заданному фильтру в теле запроса |
+    | api/user/save  | POST | **officeId**, **firstName**, lastName, middleName, **position**, phone, docCode, docName, docNumber, docDate, citizenshipCode , isIdentified  | Сохранить пользователя по заданному фильтру в теле запроса |
+
+## 2. Ответ
+Ответ будет в виде JSON строки. В случае успешного обновления\сохранения будет возвращен объект SuccessResult, содержащий строку "RESULT" = "success". 
+Все успешные результаты будут обернуты в объект data. 
+В случае какой либо ошибки будет возращен объект ErrorData, содержащий строки "error" = "Ошибка сервера." и  "codeError" = "{codeError}" ({codeError} - строка с сгенерированным кодом ошибки).
+## 3. Примеры использования
+* Запрос методом GET:
+    ```
+    localhost:8888/api/user/1
+    ```
+    Успешный ответ:
+    ```$xslt
+    {
+        "data": {
+            "id": 1,
+            "firstName": "Илья",
+            "lastName": "Климов",
+            "middleName": "Андреевич",
+            "position": "слесарь",
+            "phone": "84394959340",
+            "docName": "Удостоверение беженца",
+            "docNumber": "49385859384",
+            "docDate": "2000-05-04",
+            "citizenshipName": "РОССИЯ",
+            "citizenshipCode": "643",
+            "isIdentified": true
+        }
+    }
+    ```
+* Запрос методом POST:
+    URI:
+    ```$xslt
+    localhost:8888/api/user/save
+    ```
+    Тело запроса:
+    ```$xslt
+    {
+        "officeId": "1",
+        "firstName": "Олег",
+        "position": "Водитель"
+    }
+    ```
+    Успешный ответ:
+    ```$xslt
+    {
+        "data": {
+            "RESULT": "success"
+        }
+    }
+    ```
+* Запрос методом GET:
+    ```$xslt
+    localhost:8888/api/user/7
+    ```
+    Ответ с ошибкой:
+    ```$xslt
+    {
+        "error": "Ошибка сервера.",
+        "codeError": "501597491"
+    }
+    ```

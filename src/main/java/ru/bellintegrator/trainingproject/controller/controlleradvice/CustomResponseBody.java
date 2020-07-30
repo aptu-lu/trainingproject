@@ -46,11 +46,12 @@ public class CustomResponseBody implements ResponseBodyAdvice {
         if (o instanceof ErrorData) {
             return o;
         }
+        ResponseResult responseResult = new ResponseResult();
         if (o == null) {
             SuccessResult result = new SuccessResult();
-            return result;
+            responseResult.setData(result);
+            return responseResult;
         }
-        ResponseResult responseResult = new ResponseResult();
         responseResult.setData(o);
         return responseResult;
     }

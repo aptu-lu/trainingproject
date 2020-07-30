@@ -87,7 +87,7 @@ class OfficeControllerTest {
                 .content(objectMapper.writeValueAsString(officeFilter)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", aMapWithSize(1)))
-                .andExpect(jsonPath("$.RESULT", is("success")));
+                .andExpect(jsonPath("$.data.RESULT", is("success")));
     }
 
     @Test
@@ -112,7 +112,7 @@ class OfficeControllerTest {
                 .content(objectMapper.writeValueAsString(officeFilter)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", aMapWithSize(1)))
-                .andExpect(jsonPath("$.RESULT", is("success")));
+                .andExpect(jsonPath("$.data.RESULT", is("success")));
     }
 
     @Test

@@ -88,7 +88,7 @@ class OrganizationControllerTest {
                 .content(objectMapper.writeValueAsString(organizationFilter)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", aMapWithSize(1)))
-                .andExpect(jsonPath("$.RESULT", is("success")));
+                .andExpect(jsonPath("$.data.RESULT", is("success")));
     }
 
     @Test
@@ -118,7 +118,7 @@ class OrganizationControllerTest {
                 .content(objectMapper.writeValueAsString(organizationFilter)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", aMapWithSize(1)))
-                .andExpect(jsonPath("$.RESULT", is("success")));
+                .andExpect(jsonPath("$.data.RESULT", is("success")));
     }
 
     @Test
