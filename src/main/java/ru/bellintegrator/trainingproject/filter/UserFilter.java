@@ -54,7 +54,7 @@ public class UserFilter {
     private String phone;
 
     /**
-     * Позиция
+     * Должность
      */
     @NotNull(groups = {MarkerValidate.Update.class,MarkerValidate.Save.class})
     @Size(min = 2, max = 50, groups = {MarkerValidate.List.class, MarkerValidate.Update.class, MarkerValidate.Save.class})
@@ -184,6 +184,7 @@ public class UserFilter {
         this.citizenshipCode = citizenshipCode;
     }
 
+    @JsonProperty("isIdentified")
     public Boolean getIdentified() {
         return isIdentified;
     }

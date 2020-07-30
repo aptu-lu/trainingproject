@@ -8,6 +8,7 @@ import ru.bellintegrator.trainingproject.model.Organization;
 import ru.bellintegrator.trainingproject.model.Organization_;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -41,7 +42,11 @@ public class OrganizationDaoImpl implements OrganizationDao {
         builderQuery.select(organizationRoot);
         Predicate criteria = getPredicate(organizationFilter, criteriaBuilder, organizationRoot);
         builderQuery.where(criteria);
-        return entityManager.createQuery(builderQuery).getResultList();
+        List<Organization> resultList = entityManager.createQuery(builderQuery).getResultList();
+        if (resultList.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+        return resultList;
     }
 
     /**
@@ -95,7 +100,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         if (organizationFilter.getPhone() != null) {
             organization.setPhone(organizationFilter.getPhone());
         }
-        if (organizationFilter.getActive()) {
+        if (organizationFilter.getActive() != null) {
             organization.setActive(organizationFilter.getActive());
         }
     }

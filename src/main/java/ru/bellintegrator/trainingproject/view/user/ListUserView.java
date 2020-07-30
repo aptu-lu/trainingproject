@@ -26,7 +26,7 @@ public class ListUserView {
     private String middleName;
 
     /**
-     * Позиция
+     * Должность
      */
     private String position;
 

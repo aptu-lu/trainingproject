@@ -42,6 +42,9 @@ public class DocsDaoImpl implements DocsDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Docs loadByCode(String code) {
         String LOAD_BY_CODE = "SELECT d FROM Docs d WHERE d.code = :code";

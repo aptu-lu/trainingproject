@@ -11,6 +11,7 @@ import ru.bellintegrator.trainingproject.model.Organization;
 import ru.bellintegrator.trainingproject.model.Organization_;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -46,7 +47,11 @@ public class OfficeDaoImpl implements OfficeDao {
         builderQuery.select(officeRoot);
         Predicate criteria = getPredicate(officeFilter, criteriaBuilder,officeRoot);
         builderQuery.where(criteria);
-        return entityManager.createQuery(builderQuery).getResultList();
+        List<Office> resultList = entityManager.createQuery(builderQuery).getResultList();
+        if (resultList.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+        return resultList;
     }
 
     /**

@@ -64,7 +64,12 @@
 			<version>${hibernate.jpamodelgen.version}</version>
 			<scope>${hibernate.jpamodelgen.scope}</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

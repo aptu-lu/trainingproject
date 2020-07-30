@@ -24,9 +24,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/office/", produces = APPLICATION_JSON_VALUE)
 public class OfficeController {
 
-    /**
-     * Сервис
-     */
     private final OfficeService officeService;
 
     @Autowired

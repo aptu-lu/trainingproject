@@ -39,6 +39,7 @@ public class ListOrganizationView {
         this.name = name;
     }
 
+    @JsonProperty("isActive")
     public Boolean getActive() {
         return isActive;
     }

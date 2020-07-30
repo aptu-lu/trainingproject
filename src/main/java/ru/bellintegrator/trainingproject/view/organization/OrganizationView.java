@@ -72,6 +72,7 @@ public class OrganizationView {
         this.inn = inn;
     }
 
+    @JsonProperty("isActive")
     public Boolean getActive() {
         return isActive;
     }

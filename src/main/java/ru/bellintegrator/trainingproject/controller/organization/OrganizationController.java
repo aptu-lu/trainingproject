@@ -24,9 +24,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/organization/", produces = APPLICATION_JSON_VALUE)
 public class OrganizationController {
 
-    /**
-     * Сервис
-     */
     private final OrganizationService organizationService;
 
     @Autowired

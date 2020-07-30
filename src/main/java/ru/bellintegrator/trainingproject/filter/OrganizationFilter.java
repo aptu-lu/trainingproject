@@ -73,6 +73,7 @@ public class OrganizationFilter {
         this.id = id;
     }
 
+    @JsonProperty("isActive")
     public Boolean getActive() {
         return isActive;
     }

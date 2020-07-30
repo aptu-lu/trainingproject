@@ -2,118 +2,127 @@ package ru.bellintegrator.trainingproject.controller.office;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.bellintegrator.trainingproject.filter.OfficeFilter;
-import ru.bellintegrator.trainingproject.service.office.OfficeService;
-import ru.bellintegrator.trainingproject.view.office.ListOfficeView;
-import ru.bellintegrator.trainingproject.view.office.OfficeView;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.iterableWithSize;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-
-@WebMvcTest(OfficeController.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 class OfficeControllerTest {
 
-    @Autowired
+        @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @InjectMocks
-    private OfficeController officeController;
-
-    @MockBean
-    private OfficeService officeService;
-
     @Test
     void list() throws Exception {
-        ListOfficeView listOfficeView = new ListOfficeView();
-        listOfficeView.setId(5);
-        listOfficeView.setName("Космос");
-        listOfficeView.setActive(true);
-        ListOfficeView listOfficeView2 = new ListOfficeView();
-        listOfficeView2.setId(10);
-        listOfficeView2.setName("Звезда");
-        listOfficeView2.setActive(false);
         OfficeFilter officeFilter = new OfficeFilter();
-        officeFilter.setId(3);
-        List<ListOfficeView> listOfficeViews = Arrays.asList(listOfficeView,listOfficeView2);
-        when(officeService.getList(any(OfficeFilter.class))).thenReturn(listOfficeViews);
+        officeFilter.setOrgId(1);
         mockMvc.perform(post("/api/office/list").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(officeFilter)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data", iterableWithSize(2)))
-                .andExpect(jsonPath("$.data[0].id", is(5)))
-                .andExpect(jsonPath("$.data[0].name", is("Космос")))
+                .andExpect(jsonPath("$.data[0]", aMapWithSize(3)))
+                .andExpect(jsonPath("$.data[0].id", is(1)))
+                .andExpect(jsonPath("$.data[0].name", is("Победа")))
                 .andExpect(jsonPath("$.data[0].isActive", is(true)))
-                .andExpect(jsonPath("$.data[1].id", is(10)))
+                .andExpect(jsonPath("$.data[1]", aMapWithSize(3)))
+                .andExpect(jsonPath("$.data[1].id", is(2)))
                 .andExpect(jsonPath("$.data[1].name", is("Звезда")))
                 .andExpect(jsonPath("$.data[1].isActive", is(false)));
-        verify(officeService, times(1)).getList(any(OfficeFilter.class));
-        verifyNoMoreInteractions(officeService);
+    }
+
+    @Test()
+    void exceptionFromList() throws Exception {
+        OfficeFilter officeFilter = new OfficeFilter();
+        officeFilter.setOrgId(4);
+        mockMvc.perform(post("/api/office/list").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(officeFilter)))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", aMapWithSize(2)))
+                .andExpect(jsonPath("$.error", is("Ошибка сервера.")))
+                .andExpect(jsonPath("$.codeError", notNullValue()));
     }
 
     @Test
     void getOffice() throws Exception {
-        OfficeView officeView = new OfficeView();
-        officeView.setId(3);
-        officeView.setName("Полет");
-        officeView.setAddress("Ленина 2");
-        officeView.setPhone("8945954959");
-        officeView.setActive(true);
-        when(officeService.get(any(Integer.class))).thenReturn(officeView);
-        mockMvc.perform(get("/api/office/3"))
+        mockMvc.perform(get("/api/office/2"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.data.id", is(3)))
-                .andExpect(jsonPath("$.data.name", is("Полет")))
-                .andExpect(jsonPath("$.data.address", is("Ленина 2")))
-                .andExpect(jsonPath("$.data.phone", is("8945954959")))
-                .andExpect(jsonPath("$.data.isActive", is(true)));
-        verify(officeService, times(1)).get(any(Integer.class));
-        verifyNoMoreInteractions(officeService);
+                .andExpect(jsonPath("$.data", aMapWithSize(5)))
+                .andExpect(jsonPath("$.data.id", is(2)))
+                .andExpect(jsonPath("$.data.name", is("Звезда")))
+                .andExpect(jsonPath("$.data.address", is("ул. Лунина 7а")))
+                .andExpect(jsonPath("$.data.phone", nullValue()))
+                .andExpect(jsonPath("$.data.isActive",is(false)));
+    }
+
+    @Test
+    void exceptionFromGetOffice() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/office/7"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", aMapWithSize(2)))
+                .andExpect(jsonPath("$.error", is("Ошибка сервера.")))
+                .andExpect(jsonPath("$.codeError", notNullValue()));
     }
 
     @Test
     void update() throws Exception {
         OfficeFilter officeFilter = new OfficeFilter();
         officeFilter.setId(3);
-        doNothing().when(officeService).update(any(OfficeFilter.class));
+        officeFilter.setName("Роса");
+        officeFilter.setAddress("ул. Карпушкина 4");
         mockMvc.perform(post("/api/office/update").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(officeFilter)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", aMapWithSize(1)))
                 .andExpect(jsonPath("$.RESULT", is("success")));
-        verify(officeService, times(1)).update(any(OfficeFilter.class));
-        verifyNoMoreInteractions(officeService);
+    }
+
+    @Test
+    void exceptionFromUpdate() throws Exception {
+        OfficeFilter officeFilter = new OfficeFilter();
+        officeFilter.setId(5);
+        officeFilter.setName("Калина");
+        officeFilter.setAddress("ул. Карпушкина 4");
+        mockMvc.perform(post("/api/office/update").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(officeFilter)))
+                .andExpect(jsonPath("$", aMapWithSize(2)))
+                .andExpect(jsonPath("$.error", is("Ошибка сервера.")))
+                .andExpect(jsonPath("$.codeError", notNullValue()));
     }
 
     @Test
     void save() throws Exception {
         OfficeFilter officeFilter = new OfficeFilter();
-        officeFilter.setOrgId(3);
-        doNothing().when(officeService).add(any(OfficeFilter.class));
+        officeFilter.setOrgId(2);
+        officeFilter.setName("Пушка");
         mockMvc.perform(post("/api/office/save").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(officeFilter)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", aMapWithSize(1)))
                 .andExpect(jsonPath("$.RESULT", is("success")));
-        verify(officeService,times(1)).add(any(OfficeFilter.class));
-        verifyNoMoreInteractions(officeService);
+    }
+
+    @Test
+    void exceptionFromSave() throws Exception {
+        OfficeFilter officeFilter = new OfficeFilter();
+        mockMvc.perform(post("/api/office/save").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(officeFilter)))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", aMapWithSize(2)))
+                .andExpect(jsonPath("$.error", is("Ошибка сервера.")))
+                .andExpect(jsonPath("$.codeError", notNullValue()));
     }
 }

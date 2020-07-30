@@ -6,18 +6,10 @@ import ru.bellintegrator.trainingproject.dao.countries.CountriesDao;
 import ru.bellintegrator.trainingproject.dao.docs.DocsDao;
 import ru.bellintegrator.trainingproject.dao.office.OfficeDao;
 import ru.bellintegrator.trainingproject.filter.UserFilter;
-import ru.bellintegrator.trainingproject.model.Countries;
-import ru.bellintegrator.trainingproject.model.Countries_;
-import ru.bellintegrator.trainingproject.model.Docs;
-import ru.bellintegrator.trainingproject.model.Docs_;
-import ru.bellintegrator.trainingproject.model.Office;
-import ru.bellintegrator.trainingproject.model.Office_;
-import ru.bellintegrator.trainingproject.model.User;
-import ru.bellintegrator.trainingproject.model.UserDoc;
-import ru.bellintegrator.trainingproject.model.UserDoc_;
-import ru.bellintegrator.trainingproject.model.User_;
+import ru.bellintegrator.trainingproject.model.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -55,7 +47,11 @@ public class UserDaoImpl implements UserDao {
         builderQuery.select(userRoot);
         Predicate criteria = getPredicate(userFilter, criteriaBuilder, userRoot);
         builderQuery.where(criteria);
-        return entityManager.createQuery(builderQuery).getResultList();
+        List<User> resultList = entityManager.createQuery(builderQuery).getResultList();
+        if (resultList.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+        return resultList;
     }
 
     /**
@@ -64,9 +60,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User loadById(int id) {
         String LOAD_BY_ID = "SELECT u FROM User u LEFT JOIN FETCH u.office " +
+                "LEFT JOIN FETCH u.countries " +
                 "LEFT JOIN FETCH u.userDoc ud " +
                 "LEFT JOIN FETCH ud.docs " +
-                "LEFT JOIN FETCH u.countries " +
                 "WHERE u.id = :id";
         TypedQuery<User> query = entityManager.createQuery(LOAD_BY_ID, User.class);
         query.setParameter("id", id);

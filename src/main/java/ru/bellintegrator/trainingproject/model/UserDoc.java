@@ -44,10 +44,16 @@ public class UserDoc {
     @Column(name = "doc_number", length = 50, nullable = false)
     private String docNumber;
 
+    /**
+     * Пользователь
+     */
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
+    /**
+     * Документы
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_id", nullable = false)
     private Docs docs;

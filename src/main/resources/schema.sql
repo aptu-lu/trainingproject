@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS Office (
     id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
     org_id     INTEGER NOT NULL     COMMENT 'Уникальный идентификатор организации',
-    name       VARCHAR(50) NOT NULL COMMENT 'Название',
-    address    VARCHAR(50) NOT NULL COMMENT 'Адрес',
+    name       VARCHAR(50)          COMMENT 'Название',
+    address    VARCHAR(50)          COMMENT 'Адрес',
     phone      VARCHAR(50)          COMMENT 'Номер телефона',
     is_active  BOOLEAN              COMMENT 'Действителен ли'
 );
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS User (
 COMMENT ON TABLE User IS 'Пользователь';
 
 CREATE TABLE IF NOT EXISTS User_Doc (
-    user_id    INTEGER NOT NULL     COMMENT 'Уникальный идентификатор пользователя' PRIMARY KEY ,
+    user_id    INTEGER NOT NULL     COMMENT 'Уникальный идентификатор пользователя',
     version    INTEGER DEFAULT 1    COMMENT 'Служебное поле hibernate',
     doc_id     INTEGER              COMMENT 'Уникальный идентификатор справочника документов',
     doc_date   DATE                 COMMENT 'Дата',
@@ -61,31 +61,31 @@ CREATE TABLE IF NOT EXISTS Countries (
 );
 COMMENT ON TABLE Countries IS 'Справочник стран';
 
-CREATE INDEX IX_Office_org_id ON Office (org_id);
+CREATE INDEX IF NOT EXISTS IX_Office_org_id ON Office (org_id);
 ALTER TABLE Office ADD FOREIGN KEY (org_id) REFERENCES Organization(id);
 
-CREATE INDEX IX_User_office_id ON User (office_id);
+CREATE INDEX IF NOT EXISTS IX_User_office_id ON User (office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
-CREATE INDEX IX_User_citizenship_id ON User (citizenship_id);
+CREATE INDEX IF NOT EXISTS IX_User_citizenship_id ON User (citizenship_id);
 ALTER TABLE User ADD FOREIGN KEY (citizenship_id) REFERENCES Countries(id);
 
-CREATE INDEX IX_User_Doc_doc_id ON User_Doc (doc_id);
+CREATE INDEX IF NOT EXISTS IX_User_Doc_doc_id ON User_Doc (doc_id);
 ALTER TABLE User_Doc ADD FOREIGN KEY (doc_id) REFERENCES Docs(id);
 
-CREATE INDEX IX_Organization_name ON Organization (name);
-CREATE INDEX IX_Organization_inn ON Organization (inn);
-CREATE INDEX IX_Organization_is_active ON Organization (is_active);
+CREATE INDEX IF NOT EXISTS IX_Organization_name ON Organization (name);
+CREATE INDEX IF NOT EXISTS IX_Organization_inn ON Organization (inn);
+CREATE INDEX IF NOT EXISTS IX_Organization_is_active ON Organization (is_active);
 
-CREATE INDEX IX_Office_name ON Office (name);
-CREATE INDEX IX_Office_phone ON Office (phone);
-CREATE INDEX IX_Office_is_active ON Office (is_active);
+CREATE INDEX IF NOT EXISTS IX_Office_name ON Office (name);
+CREATE INDEX IF NOT EXISTS IX_Office_phone ON Office (phone);
+CREATE INDEX IF NOT EXISTS IX_Office_is_active ON Office (is_active);
 
-CREATE INDEX IX_User_first_name ON User (first_name);
-CREATE INDEX IX_User_last_name ON User (last_name);
-CREATE INDEX IX_User_middle_name ON User (middle_name);
-CREATE INDEX IX_User_position ON User (position);
+CREATE INDEX IF NOT EXISTS IX_User_first_name ON User (first_name);
+CREATE INDEX IF NOT EXISTS IX_User_last_name ON User (last_name);
+CREATE INDEX IF NOT EXISTS IX_User_middle_name ON User (middle_name);
+CREATE INDEX IF NOT EXISTS IX_User_position ON User (position);
 
-CREATE INDEX IX_Docs_code ON Docs (code);
+CREATE INDEX IF NOT EXISTS IX_Docs_code ON Docs (code);
 
-CREATE INDEX IX_Countries_code ON Countries (code);
+CREATE INDEX IF NOT EXISTS IX_Countries_code ON Countries (code);

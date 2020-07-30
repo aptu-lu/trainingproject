@@ -53,7 +53,7 @@ public class User {
     private String middleName;
 
     /**
-     * Позиция
+     * Должность
      */
     @Column(name = "position", length = 50, nullable = false)
     private String position;
@@ -70,13 +70,22 @@ public class User {
     @Column(name = "is_identified")
     private Boolean isIdentified;
 
+    /**
+     * Офис
+     */
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "office_id")
     private Office office;
 
+    /**
+     * Документы пользователя
+     */
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserDoc userDoc;
 
+    /**
+     * Страны
+     */
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "citizenship_id")
     private Countries countries;

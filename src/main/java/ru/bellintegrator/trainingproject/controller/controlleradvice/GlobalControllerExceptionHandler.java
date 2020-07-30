@@ -12,21 +12,27 @@ import ru.bellintegrator.trainingproject.view.ErrorData;
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
 
-    /**
-     * Логгер
-     */
     private static final Logger log = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 
     /**
-     * Перехватывает все необработанные исключения, логирует сообщение ошибки и возвращает сообщение с кодом ошибки
+     * Перехватывает все необработанные исключения, генерирует код ошибки,
+     * логирует сообщение ошибки и возвращает сообщение с кодом ошибки
      *
      * @param ex исключение
      * @return {@link ErrorData} сообщение с кодом ошибки
      */
     @ExceptionHandler(Exception.class)
     public ErrorData defaultErrorHandler(Exception ex) {
-        ErrorData errorData = new ErrorData("Ошибка сервера.");
+        String codeError = generatorCodeError();
+        ErrorData errorData = new ErrorData("Ошибка сервера.", codeError);
         log.info(ex.getMessage()+ " Code error: " + errorData.getCodeError());
         return errorData;
+    }
+
+    private String generatorCodeError() {
+        long max = 999999999;
+        long min = 100000000;
+        int result = (int)(Math.random() * ((max - min) + 1) + min);
+        return "" + result;
     }
 }

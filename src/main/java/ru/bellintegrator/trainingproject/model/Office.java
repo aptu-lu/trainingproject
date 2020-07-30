@@ -36,13 +36,13 @@ public class Office {
     /**
      * Название
      */
-    @Column(name = "name", length = 50, nullable = false)
+    @Column(name = "name", length = 50)
     private String name;
 
     /**
      * Адресс
      */
-    @Column(name = "address", length = 50, nullable = false)
+    @Column(name = "address", length = 50)
     private String address;
 
     /**
@@ -57,8 +57,11 @@ public class Office {
     @Column(name = "is_active")
     private Boolean isActive;
 
+    /**
+     * Организация
+     */
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "org_id")
+    @JoinColumn(name = "org_id", nullable = false)
     private Organization organization;
 
     public int getId() {

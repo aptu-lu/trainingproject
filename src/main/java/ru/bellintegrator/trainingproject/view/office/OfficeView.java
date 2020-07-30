@@ -65,6 +65,7 @@ public class OfficeView {
         this.phone = phone;
     }
 
+    @JsonProperty("isActive")
     public Boolean getActive() {
         return isActive;
     }

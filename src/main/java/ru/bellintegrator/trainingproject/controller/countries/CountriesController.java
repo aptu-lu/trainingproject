@@ -18,9 +18,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/countries", produces = APPLICATION_JSON_VALUE)
 public class CountriesController {
 
-    /**
-     * Сервис
-     */
     private final CountriesService countriesService;
 
     @Autowired

@@ -30,7 +30,7 @@ public class UserView {
     private String middleName;
 
     /**
-     * Позиция
+     * Должность
      */
     private String position;
 
@@ -118,6 +118,7 @@ public class UserView {
         this.phone = phone;
     }
 
+    @JsonProperty("isIdentified")
     public Boolean getIdentified() {
         return isIdentified;
     }

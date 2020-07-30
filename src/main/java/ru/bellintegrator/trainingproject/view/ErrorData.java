@@ -15,9 +15,9 @@ public class ErrorData {
      */
     private String codeError;
 
-    public ErrorData(String error) {
+    public ErrorData(String error, String codeError) {
         this.error = error;
-        this.codeError = generatorCodeError();
+        this.codeError = codeError;
     }
 
     public String getError() {
@@ -34,12 +34,5 @@ public class ErrorData {
 
     public void setCodeError(String codeError) {
         this.codeError = codeError;
-    }
-
-    private String generatorCodeError() {
-        long max = 999999999;
-        long min = 100000000;
-        int result = (int)(Math.random() * ((max - min) + 1) + min);
-        return "" + result;
     }
 }

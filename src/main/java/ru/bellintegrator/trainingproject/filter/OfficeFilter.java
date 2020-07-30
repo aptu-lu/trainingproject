@@ -92,6 +92,7 @@ public class OfficeFilter {
         this.phone = phone;
     }
 
+    @JsonProperty("isActive")
     public Boolean getActive() {
         return isActive;
     }
