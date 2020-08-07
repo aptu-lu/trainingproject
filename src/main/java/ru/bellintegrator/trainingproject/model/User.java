@@ -148,6 +148,9 @@ public class User {
 
     public void setUserDoc(UserDoc userDoc) {
         this.userDoc = userDoc;
+        if (userDoc.getUser() != this) {
+            userDoc.setUser(this);
+        }
     }
 
     public Countries getCountries() {

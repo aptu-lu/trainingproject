@@ -131,7 +131,6 @@ public class UserDaoImpl implements UserDao {
         if (userFilter.getMiddleName() != null) {
             user.setMiddleName(userFilter.getMiddleName());
         }
-
         if (userFilter.getPhone() != null) {
             user.setPhone(userFilter.getPhone());
         }

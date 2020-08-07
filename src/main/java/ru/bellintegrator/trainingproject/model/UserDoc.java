@@ -35,13 +35,13 @@ public class UserDoc {
     /**
      * Дата
      */
-    @Column(name = "doc_date", nullable = false)
+    @Column(name = "doc_date")
     private LocalDate docDate;
 
     /**
      * Номер
      */
-    @Column(name = "doc_number", length = 50, nullable = false)
+    @Column(name = "doc_number", length = 50)
     private String docNumber;
 
     /**
@@ -55,7 +55,7 @@ public class UserDoc {
      * Документы
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doc_id", nullable = false)
+    @JoinColumn(name = "doc_id")
     private Docs docs;
 
     public User getUser() {
@@ -64,6 +64,9 @@ public class UserDoc {
 
     public void setUser(User user) {
         this.user = user;
+        if (user.getUserDoc() != this) {
+            user.setUserDoc(this);
+        }
     }
 
     public int getId() {
