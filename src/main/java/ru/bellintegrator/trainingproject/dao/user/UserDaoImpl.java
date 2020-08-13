@@ -6,7 +6,16 @@ import ru.bellintegrator.trainingproject.dao.countries.CountriesDao;
 import ru.bellintegrator.trainingproject.dao.docs.DocsDao;
 import ru.bellintegrator.trainingproject.dao.office.OfficeDao;
 import ru.bellintegrator.trainingproject.filter.UserFilter;
-import ru.bellintegrator.trainingproject.model.*;
+import ru.bellintegrator.trainingproject.model.Countries;
+import ru.bellintegrator.trainingproject.model.Countries_;
+import ru.bellintegrator.trainingproject.model.Docs;
+import ru.bellintegrator.trainingproject.model.Docs_;
+import ru.bellintegrator.trainingproject.model.Office;
+import ru.bellintegrator.trainingproject.model.Office_;
+import ru.bellintegrator.trainingproject.model.User;
+import ru.bellintegrator.trainingproject.model.UserDoc;
+import ru.bellintegrator.trainingproject.model.UserDoc_;
+import ru.bellintegrator.trainingproject.model.User_;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
